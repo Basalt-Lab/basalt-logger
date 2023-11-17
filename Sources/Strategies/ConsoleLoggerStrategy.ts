@@ -13,23 +13,23 @@ export class ConsoleLoggerStrategy implements ILoggerStrategy {
      * @param {unknown} object - Optional additional information to log.
      */
     public log(level: LogLevels, message: string, object?: unknown): void {
+        const fullMessage: string = object ? `${message} ${JSON.stringify(object)}` : message;
+
         switch (level) {
         case LogLevels.ERROR:
-            console.error(message + (object ? ' ' + object : ''));
+            console.error(fullMessage);
             break;
         case LogLevels.WARN:
-            console.warn(message + (object ? ' ' + object : ''));
+            console.warn(fullMessage);
             break;
         case LogLevels.INFO:
-            console.info(message + (object ? ' ' + object : ''));
+            console.info(fullMessage);
             break;
         case LogLevels.DEBUG:
-            console.debug(message + (object ? ' ' + object : ''));
+            console.debug(fullMessage);
             break;
         case LogLevels.LOG:
-            console.log(message + (object ? ' ' + object : ''));
-            break;
-        default:
+            console.log(fullMessage);
             break;
         }
     }

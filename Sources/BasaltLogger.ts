@@ -85,7 +85,7 @@ export class BasaltLogger {
         return JSON.stringify({
             level,
             message: logMessage,
-            object: object ? JSON.stringify(object) : undefined
+            object: object ?? undefined
         });
     }
 
