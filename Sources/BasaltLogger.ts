@@ -66,8 +66,8 @@ export class BasaltLogger {
     }
 
     private static _logStream: Writable = new Writable({
-        write: (chunk: Buffer | string, encoding: BufferEncoding, callback: (error?: Error | null) => void): void => {
-            const { level, message, object } = JSON.parse(chunk instanceof Buffer ? chunk.toString() : chunk);
+        write: (chunk: Buffer, encoding: BufferEncoding, callback: (error?: Error | null) => void): void => {
+            const { level, message, object } = JSON.parse(chunk.toString());
             BasaltLogger.executeStrategies(level, message, object);
             callback();
         }
@@ -99,7 +99,7 @@ export class BasaltLogger {
         const logEntry: string = BasaltLogger.formatLogEntry(level, message, object);
         BasaltLogger._logStream.write(logEntry + '\n');
     }
-    
+
     /**
      * Logs an error message.
      * @param {string} message - The error message to log.
