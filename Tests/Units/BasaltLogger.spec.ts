@@ -7,7 +7,7 @@ describe('BasaltLogger', (): void => {
         mockStrategy = {
             log: jest.fn()
         };
-        BasaltLogger['_strategies'] = [];
+        BasaltLogger.clearStrategies();
     });
 
     describe('addStrategy', (): void => {
@@ -59,7 +59,6 @@ describe('BasaltLogger', (): void => {
         });
     });
 
-
     describe('removeStrategies', (): void => {
         test('should remove multiple logging strategies', (): void => {
             const mockStrategy2: ILoggerStrategy = {
@@ -81,13 +80,34 @@ describe('BasaltLogger', (): void => {
         });
     });
 
+    describe('clearStrategies', (): void => {
+        test('should clear all logging strategies', (): void => {
+            BasaltLogger.addStrategy(mockStrategy);
+            BasaltLogger.clearStrategies();
+            expect(BasaltLogger['_strategies']).toEqual([]);
+        });
+    });
+
     describe('error', (): void => {
         test('should log an error message', (): void => {
             BasaltLogger.addStrategy(mockStrategy);
             BasaltLogger.error('Test Error');
             expect(mockStrategy.log).toHaveBeenCalledWith(LogLevels.ERROR, expect.any(String), undefined);
         });
+
+        test('should log an error message with an object', (): void => {
+            BasaltLogger.addStrategy(mockStrategy);
+            BasaltLogger.error('Test Error', { test: 'test' });
+            expect(mockStrategy.log).toHaveBeenCalledWith(LogLevels.ERROR, expect.any(String), { test: 'test' });
+        });
+
+        test('should throw an error when no strategies are added', (): void => {
+            expect((): void => {
+                BasaltLogger.error('Test Error');
+            }).toThrow('No strategies added');
+        });
     });
+
 
     describe('warn', (): void => {
         test('should log a warning message', (): void => {
@@ -100,6 +120,12 @@ describe('BasaltLogger', (): void => {
             BasaltLogger.addStrategy(mockStrategy);
             BasaltLogger.warn('Test Warning', { test: 'test' });
             expect(mockStrategy.log).toHaveBeenCalledWith(LogLevels.WARN, expect.any(String), { test: 'test' });
+        });
+
+        test('should throw an error when no strategies are added', (): void => {
+            expect((): void => {
+                BasaltLogger.warn('Test Warning');
+            }).toThrow('No strategies added');
         });
     });
 
@@ -115,6 +141,12 @@ describe('BasaltLogger', (): void => {
             BasaltLogger.info('Test Info', { test: 'test' });
             expect(mockStrategy.log).toHaveBeenCalledWith(LogLevels.INFO, expect.any(String), { test: 'test' });
         });
+
+        test('should throw an error when no strategies are added', (): void => {
+            expect((): void => {
+                BasaltLogger.info('Test Info');
+            }).toThrow('No strategies added');
+        });
     });
 
     describe('debug', (): void => {
@@ -128,6 +160,12 @@ describe('BasaltLogger', (): void => {
             BasaltLogger.addStrategy(mockStrategy);
             BasaltLogger.debug('Test Debug', { test: 'test' });
             expect(mockStrategy.log).toHaveBeenCalledWith(LogLevels.DEBUG, expect.any(String), { test: 'test' });
+        });
+
+        test('should throw an error when no strategies are added', (): void => {
+            expect((): void => {
+                BasaltLogger.info('Test Debug');
+            }).toThrow('No strategies added');
         });
     });
 
@@ -144,7 +182,11 @@ describe('BasaltLogger', (): void => {
             expect(mockStrategy.log).toHaveBeenCalledWith(LogLevels.LOG, expect.any(String), { test: 'test' });
         });
 
+        test('should throw an error when no strategies are added', (): void => {
+            expect((): void => {
+                BasaltLogger.log('Test Log');
+            }).toThrow('No strategies added');
+        });
     });
-
 });
 

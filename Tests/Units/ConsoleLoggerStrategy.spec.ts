@@ -1,6 +1,5 @@
 import { ConsoleLoggerStrategy, LogLevels } from '@/App';
 
-
 describe('ConsoleLoggerStrategy', (): void => {
     let mockConsoleError: jest.SpyInstance;
     let mockConsoleWarn: jest.SpyInstance;
