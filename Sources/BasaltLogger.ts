@@ -55,6 +55,14 @@ export class BasaltLogger {
     }
 
     /**
+     * Clears all logging strategies from the logger.
+     * @returns {void}
+     */
+    public static clearStrategies(): void {
+        BasaltLogger._strategies = [];
+    }
+
+    /**
      * Executes all added logging strategies with the given log information.
      * @param {LogLevels} level - The log level.
      * @param {string} message - The log message.
@@ -104,8 +112,11 @@ export class BasaltLogger {
      * Logs an error message.
      * @param {string} message - The error message to log.
      * @param {unknown} object - Optional additional log information.
+     * @throws {BasaltLoggerError} - Throws an error if no strategies are added.
      */
     public static error(message: string, object?: unknown): void {
+        if (BasaltLogger._strategies.length === 0)
+            throw new BasaltLoggerError('No strategies added');
         BasaltLogger.out(LogLevels.ERROR, `ERROR : ${message}`, object);
     }
 
@@ -113,8 +124,11 @@ export class BasaltLogger {
      * Logs a warning message.
      * @param {string} message - The warning message to log.
      * @param {unknown} object - Optional additional log information.
+     * @throws {BasaltLoggerError} - Throws an error if no strategies are added.
      */
     public static warn(message: string, object?: unknown): void {
+        if (BasaltLogger._strategies.length === 0)
+            throw new BasaltLoggerError('No strategies added');
         BasaltLogger.out(LogLevels.WARN, `WARN : ${message}`, object);
     }
 
@@ -122,8 +136,11 @@ export class BasaltLogger {
      * Logs an informational message.
      * @param {string} message - The info message to log.
      * @param {unknown} object - Optional additional log information.
+     * @throws {BasaltLoggerError} - Throws an error if no strategies are added.
      */
     public static info(message: string, object?: unknown): void {
+        if (BasaltLogger._strategies.length === 0)
+            throw new BasaltLoggerError('No strategies added');
         BasaltLogger.out(LogLevels.INFO, `INFO : ${message}`, object);
     }
 
@@ -131,8 +148,11 @@ export class BasaltLogger {
      * Logs a debug message.
      * @param {string} message - The debug message to log.
      * @param {unknown} object - Optional additional log information.
+     * @throws {BasaltLoggerError} - Throws an error if no strategies are added.
      */
     public static debug(message: string, object?: unknown): void {
+        if (BasaltLogger._strategies.length === 0)
+            throw new BasaltLoggerError('No strategies added');
         BasaltLogger.out(LogLevels.DEBUG, `DEBUG : ${message}`, object);
     }
 
@@ -140,8 +160,11 @@ export class BasaltLogger {
      * Logs a general log message.
      * @param {string} message - The log message to record.
      * @param {unknown} object - Optional additional log information.
+     * @throws {BasaltLoggerError} - Throws an error if no strategies are added.
      */
     public static log(message: string, object?: unknown): void {
+        if (BasaltLogger._strategies.length === 0)
+            throw new BasaltLoggerError('No strategies added');
         BasaltLogger.out(LogLevels.LOG, `LOG : ${message}`, object);
     }
 }
