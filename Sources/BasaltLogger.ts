@@ -106,7 +106,7 @@ export class BasaltLogger {
      * @param {unknown} object - Optional additional log information.
      */
     public static error(message: string, object?: unknown): void {
-        BasaltLogger.out(LogLevels.ERROR, `\x1b[31mERROR\x1b[0m : ${message}`, object);
+        BasaltLogger.out(LogLevels.ERROR, `ERROR : ${message}`, object);
     }
 
     /**
@@ -115,7 +115,7 @@ export class BasaltLogger {
      * @param {unknown} object - Optional additional log information.
      */
     public static warn(message: string, object?: unknown): void {
-        BasaltLogger.out(LogLevels.WARN, `\x1b[33mWARN\x1b[0m : ${message}`, object);
+        BasaltLogger.out(LogLevels.WARN, `WARN : ${message}`, object);
     }
 
     /**
@@ -124,7 +124,7 @@ export class BasaltLogger {
      * @param {unknown} object - Optional additional log information.
      */
     public static info(message: string, object?: unknown): void {
-        BasaltLogger.out(LogLevels.INFO, `\x1b[36mINFO\x1b[0m : ${message}`, object);
+        BasaltLogger.out(LogLevels.INFO, `INFO : ${message}`, object);
     }
 
     /**
@@ -133,7 +133,7 @@ export class BasaltLogger {
      * @param {unknown} object - Optional additional log information.
      */
     public static debug(message: string, object?: unknown): void {
-        BasaltLogger.out(LogLevels.DEBUG, `\x1b[32mDEBUG\x1b[0m : ${message}`, object);
+        BasaltLogger.out(LogLevels.DEBUG, `DEBUG : ${message}`, object);
     }
 
     /**
@@ -142,6 +142,6 @@ export class BasaltLogger {
      * @param {unknown} object - Optional additional log information.
      */
     public static log(message: string, object?: unknown): void {
-        BasaltLogger.out(LogLevels.LOG, `\x1b[37mLOG\x1b[0m : ${message}`, object);
+        BasaltLogger.out(LogLevels.LOG, `LOG : ${message}`, object);
     }
 }
