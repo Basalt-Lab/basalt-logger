@@ -108,7 +108,6 @@ describe('BasaltLogger', (): void => {
         });
     });
 
-
     describe('warn', (): void => {
         test('should log a warning message', (): void => {
             BasaltLogger.addStrategy(mockStrategy);
@@ -164,7 +163,7 @@ describe('BasaltLogger', (): void => {
 
         test('should throw an error when no strategies are added', (): void => {
             expect((): void => {
-                BasaltLogger.info('Test Debug');
+                BasaltLogger.debug('Test Debug');
             }).toThrow('No strategies added');
         });
     });
