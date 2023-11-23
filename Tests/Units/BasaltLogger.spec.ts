@@ -88,103 +88,31 @@ describe('BasaltLogger', (): void => {
         });
     });
 
-    describe('error', (): void => {
-        test('should log an error message', (): void => {
-            BasaltLogger.addStrategy(mockStrategy);
-            BasaltLogger.error('Test Error');
-            expect(mockStrategy.log).toHaveBeenCalledWith(LogLevels.ERROR, expect.any(String), undefined);
-        });
+    [LogLevels.LOG, LogLevels.INFO, LogLevels.ERROR, LogLevels.WARN, LogLevels.DEBUG].forEach((level: LogLevels): void => {
+        describe(level.toLowerCase(), (): void => {
+            test(`should log a ${level} message`, (): void => {
+                BasaltLogger.addStrategy(mockStrategy);
+                const levelMethodString: string = level.toLowerCase();
+                const levelMethod = BasaltLogger[levelMethodString as keyof typeof BasaltLogger] as (message: string) => void;
+                levelMethod('Test Message');
+                expect(mockStrategy.log).toHaveBeenCalledWith(level, expect.any(String), undefined);
+            });
 
-        test('should log an error message with an object', (): void => {
-            BasaltLogger.addStrategy(mockStrategy);
-            BasaltLogger.error('Test Error', { test: 'test' });
-            expect(mockStrategy.log).toHaveBeenCalledWith(LogLevels.ERROR, expect.any(String), { test: 'test' });
-        });
+            test(`should log a ${level} message with an object`, (): void => {
+                BasaltLogger.addStrategy(mockStrategy);
+                const levelMethodString: string = level.toLowerCase();
+                const levelMethod = BasaltLogger[levelMethodString as keyof typeof BasaltLogger] as (message: string, object: unknown) => void;
+                levelMethod('Test Message', { test: 'test' });
+                expect(mockStrategy.log).toHaveBeenCalledWith(level, expect.any(String), { test: 'test' });
+            });
 
-        test('should throw an error when no strategies are added', (): void => {
-            expect((): void => {
-                BasaltLogger.error('Test Error');
-            }).toThrow('No strategies added');
-        });
-    });
-
-    describe('warn', (): void => {
-        test('should log a warning message', (): void => {
-            BasaltLogger.addStrategy(mockStrategy);
-            BasaltLogger.warn('Test Warning');
-            expect(mockStrategy.log).toHaveBeenCalledWith(LogLevels.WARN, expect.any(String), undefined);
-        });
-
-        test('should log a warning message with an object', (): void => {
-            BasaltLogger.addStrategy(mockStrategy);
-            BasaltLogger.warn('Test Warning', { test: 'test' });
-            expect(mockStrategy.log).toHaveBeenCalledWith(LogLevels.WARN, expect.any(String), { test: 'test' });
-        });
-
-        test('should throw an error when no strategies are added', (): void => {
-            expect((): void => {
-                BasaltLogger.warn('Test Warning');
-            }).toThrow('No strategies added');
-        });
-    });
-
-    describe('info', (): void => {
-        test('should log an info message', (): void => {
-            BasaltLogger.addStrategy(mockStrategy);
-            BasaltLogger.info('Test Info');
-            expect(mockStrategy.log).toHaveBeenCalledWith(LogLevels.INFO, expect.any(String), undefined);
-        });
-
-        test('should log an info message with an object', (): void => {
-            BasaltLogger.addStrategy(mockStrategy);
-            BasaltLogger.info('Test Info', { test: 'test' });
-            expect(mockStrategy.log).toHaveBeenCalledWith(LogLevels.INFO, expect.any(String), { test: 'test' });
-        });
-
-        test('should throw an error when no strategies are added', (): void => {
-            expect((): void => {
-                BasaltLogger.info('Test Info');
-            }).toThrow('No strategies added');
-        });
-    });
-
-    describe('debug', (): void => {
-        test('should log a debug message', (): void => {
-            BasaltLogger.addStrategy(mockStrategy);
-            BasaltLogger.debug('Test Debug');
-            expect(mockStrategy.log).toHaveBeenCalledWith(LogLevels.DEBUG, expect.any(String), undefined);
-        });
-
-        test('should log a debug message with an object', (): void => {
-            BasaltLogger.addStrategy(mockStrategy);
-            BasaltLogger.debug('Test Debug', { test: 'test' });
-            expect(mockStrategy.log).toHaveBeenCalledWith(LogLevels.DEBUG, expect.any(String), { test: 'test' });
-        });
-
-        test('should throw an error when no strategies are added', (): void => {
-            expect((): void => {
-                BasaltLogger.debug('Test Debug');
-            }).toThrow('No strategies added');
-        });
-    });
-
-    describe('log', (): void => {
-        test('should log a log message', (): void => {
-            BasaltLogger.addStrategy(mockStrategy);
-            BasaltLogger.log('Test Trace');
-            expect(mockStrategy.log).toHaveBeenCalledWith(LogLevels.LOG, expect.any(String), undefined);
-        });
-
-        test('should log a log message with an object', (): void => {
-            BasaltLogger.addStrategy(mockStrategy);
-            BasaltLogger.log('Test Trace', { test: 'test' });
-            expect(mockStrategy.log).toHaveBeenCalledWith(LogLevels.LOG, expect.any(String), { test: 'test' });
-        });
-
-        test('should throw an error when no strategies are added', (): void => {
-            expect((): void => {
-                BasaltLogger.log('Test Log');
-            }).toThrow('No strategies added');
+            test(`should throw an error when no strategies are added`, (): void => {
+                const levelMethodString: string = level.toLowerCase();
+                const levelMethod = BasaltLogger[levelMethodString as keyof typeof BasaltLogger] as (message: string) => void;
+                expect((): void => {
+                    levelMethod('Test Message');
+                }).toThrow('No strategies added');
+            });
         });
     });
 });
