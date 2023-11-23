@@ -1,81 +1,42 @@
 import { ConsoleLoggerStrategy, LogLevels } from '@/App';
 
 describe('ConsoleLoggerStrategy', (): void => {
-    let mockConsoleError: jest.SpyInstance;
-    let mockConsoleWarn: jest.SpyInstance;
-    let mockConsoleInfo: jest.SpyInstance;
-    let mockConsoleDebug: jest.SpyInstance;
-    let mockConsoleLog: jest.SpyInstance;
+    let mockConsole: { [key in keyof Console]?: jest.Mock };
+    let strategy: ConsoleLoggerStrategy;
 
     beforeEach((): void => {
-        mockConsoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
-        mockConsoleWarn = jest.spyOn(console, 'warn').mockImplementation(() => {});
-        mockConsoleInfo = jest.spyOn(console, 'info').mockImplementation(() => {});
-        mockConsoleDebug = jest.spyOn(console, 'debug').mockImplementation(() => {});
-        mockConsoleLog = jest.spyOn(console, 'log').mockImplementation(() => {});
+        mockConsole = {
+            error: jest.fn(),
+            warn: jest.fn(),
+            info: jest.fn(),
+            debug: jest.fn(),
+            log: jest.fn()
+        };
+        strategy = new ConsoleLoggerStrategy();
+        jest.spyOn(console, 'error').mockImplementation(mockConsole.error!);
+        jest.spyOn(console, 'warn').mockImplementation(mockConsole.warn!);
+        jest.spyOn(console, 'info').mockImplementation(mockConsole.info!);
+        jest.spyOn(console, 'debug').mockImplementation(mockConsole.debug!);
+        jest.spyOn(console, 'log').mockImplementation(mockConsole.log!);
     });
 
     afterEach((): void => {
         jest.restoreAllMocks();
     });
 
-    test('should log an error message', (): void => {
-        const strategy: ConsoleLoggerStrategy = new ConsoleLoggerStrategy();
-        strategy.log(LogLevels.ERROR, 'test');
-        expect(mockConsoleError).toHaveBeenCalledWith('test');
-    });
+    const logLevels: LogLevels[] = [LogLevels.ERROR, LogLevels.WARN, LogLevels.INFO, LogLevels.DEBUG, LogLevels.LOG];
 
-    test('should log an error message with an object', (): void => {
-        const strategy: ConsoleLoggerStrategy = new ConsoleLoggerStrategy();
-        strategy.log(LogLevels.ERROR, 'test', { foo: 'bar' });
-        expect(mockConsoleError).toHaveBeenCalledWith('test {"foo":"bar"}');
-    });
+    logLevels.forEach((level: LogLevels): void => {
+        test(`should log a ${level} message`, (): void => {
+            strategy.log(level, 'test');
+            const mockMethod = mockConsole[level.toLowerCase() as keyof Console];
+            expect(mockMethod).toHaveBeenCalledWith('test');
+        });
 
-    test('should log a warn message', (): void => {
-        const strategy: ConsoleLoggerStrategy = new ConsoleLoggerStrategy();
-        strategy.log(LogLevels.WARN, 'test');
-        expect(mockConsoleWarn).toHaveBeenCalledWith('test');
-    });
-
-    test('should log a warn message with an object', (): void => {
-        const strategy: ConsoleLoggerStrategy = new ConsoleLoggerStrategy();
-        strategy.log(LogLevels.WARN, 'test', { foo: 'bar' });
-        expect(mockConsoleWarn).toHaveBeenCalledWith('test {"foo":"bar"}');
-    });
-
-    test('should log an info message', (): void => {
-        const strategy: ConsoleLoggerStrategy = new ConsoleLoggerStrategy();
-        strategy.log(LogLevels.INFO, 'test');
-        expect(mockConsoleInfo).toHaveBeenCalledWith('test');
-    });
-
-    test('should log an info message with an object', (): void => {
-        const strategy: ConsoleLoggerStrategy = new ConsoleLoggerStrategy();
-        strategy.log(LogLevels.INFO, 'test', { foo: 'bar' });
-        expect(mockConsoleInfo).toHaveBeenCalledWith('test {"foo":"bar"}');
-    });
-
-    test('should log a debug message', (): void => {
-        const strategy: ConsoleLoggerStrategy = new ConsoleLoggerStrategy();
-        strategy.log(LogLevels.DEBUG, 'test');
-        expect(mockConsoleDebug).toHaveBeenCalledWith('test');
-    });
-
-    test('should log a debug message with an object', (): void => {
-        const strategy: ConsoleLoggerStrategy = new ConsoleLoggerStrategy();
-        strategy.log(LogLevels.DEBUG, 'test', { foo: 'bar' });
-        expect(mockConsoleDebug).toHaveBeenCalledWith('test {"foo":"bar"}');
-    });
-
-    test('should log a log message', (): void => {
-        const strategy: ConsoleLoggerStrategy = new ConsoleLoggerStrategy();
-        strategy.log(LogLevels.LOG, 'test');
-        expect(mockConsoleLog).toHaveBeenCalledWith('test');
-    });
-
-    test('should log a log message with an object', (): void => {
-        const strategy: ConsoleLoggerStrategy = new ConsoleLoggerStrategy();
-        strategy.log(LogLevels.LOG, 'test', { foo: 'bar' });
-        expect(mockConsoleLog).toHaveBeenCalledWith('test {"foo":"bar"}');
+        test(`should log a ${level} message with an object`, (): void => {
+            strategy.log(level, 'test', { foo: 'bar' });
+            const mockMethod = mockConsole[level.toLowerCase() as keyof Console];
+            expect(mockMethod).toHaveBeenCalledWith('test {"foo":"bar"}');
+        });
     });
 });
