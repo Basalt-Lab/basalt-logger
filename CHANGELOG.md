@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.1.0](https://github.com/Basalt-Lab/basalt-logger/compare/v1.0.0...v1.1.0) (2023-11-23)
+
+
+### Features
+
+* add FileLoggerStrategy ([2c35468](https://github.com/Basalt-Lab/basalt-logger/commit/2c354688ff641d32e30a7c4fd250b9722735e158))
+
+
+### Tests
+
+* add FileLoggerStrategy tests ([9a61214](https://github.com/Basalt-Lab/basalt-logger/commit/9a612146aedf40364d12e2d33d0bfd436bf604b7))
+* improvement BasaltLogger tests ([4af8112](https://github.com/Basalt-Lab/basalt-logger/commit/4af8112df107e848ea322d8adc3ed219b4496bdb))
+* improvement ConsoleLoggerStrategy tests ([7d2a52f](https://github.com/Basalt-Lab/basalt-logger/commit/7d2a52f2f05696bb0a9dc46bbe886312d53ce46f))
+
 ## 1.0.0 (2023-11-21)
 
 
