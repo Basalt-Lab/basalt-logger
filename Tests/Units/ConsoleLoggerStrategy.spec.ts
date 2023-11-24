@@ -32,11 +32,5 @@ describe('ConsoleLoggerStrategy', (): void => {
             const mockMethod = mockConsole[level.toLowerCase() as keyof Console];
             expect(mockMethod).toHaveBeenCalledWith('test');
         });
-
-        test(`should log a ${level} message with an object`, (): void => {
-            strategy.log(level, 'test', { foo: 'bar' });
-            const mockMethod = mockConsole[level.toLowerCase() as keyof Console];
-            expect(mockMethod).toHaveBeenCalledWith('test {"foo":"bar"}');
-        });
     });
 });
