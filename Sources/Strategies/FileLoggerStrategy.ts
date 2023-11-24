@@ -22,11 +22,9 @@ export class FileLoggerStrategy implements ILoggerStrategy {
      * Logs a message to the file system with the specified log level.
      * @param {LogLevels} level - The log level at which the message should be logged.
      * @param {string} message - The message to log.
-     * @param {unknown} object - Optional additional information to log.
      */
-    public log(level: LogLevels, message: string, object?: unknown): void {
-        const fullMessage: string = object ? `${message} ${JSON.stringify(object)}` : message;
-        appendFile(this._path, `${fullMessage}\n`, (err): void => {
+    public log(level: LogLevels, message: string): void {
+        appendFile(this._path, `${message}\n`, (err): void => {
             if (err) throw err;
         });
     }
