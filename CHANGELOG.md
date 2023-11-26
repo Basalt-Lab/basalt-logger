@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.2.0](https://github.com/Basalt-Lab/basalt-logger/compare/v1.1.0...v1.2.0) (2023-11-26)
+
+
+### Features
+
+* Log in specific strategies and not necessarily all strategies ([8ef3d9a](https://github.com/Basalt-Lab/basalt-logger/commit/8ef3d9a1ee3764f1d895d872891f9870cf03e118))
+
+
+### Tests
+
+* update tests ([f131178](https://github.com/Basalt-Lab/basalt-logger/commit/f131178dc73432acd167b0661e6adaa2d4548c98))
+
 ## [1.1.0](https://github.com/Basalt-Lab/basalt-logger/compare/v1.0.0...v1.1.0) (2023-11-23)
 
 
