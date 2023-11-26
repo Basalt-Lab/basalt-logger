@@ -8,163 +8,177 @@ import { BasaltLoggerError } from '@/Errors';
  * BasaltLogger provides a flexible logging system that allows multiple strategies for log output.
  */
 export class BasaltLogger {
-    private static _strategies: ILoggerStrategy[] = [];
+    /**
+     * Stores the logging strategies mapped by their names.
+     * @private
+     */
+    private static _strategies: Map<string, ILoggerStrategy> = new Map<string, ILoggerStrategy>();
 
     /**
-     * Adds a logging strategy to the logger.
-     * @param {ILoggerStrategy} strategy - The logging strategy to add.
-     * @throws {BasaltLoggerError} - Throws an error if the strategy is already added.
+     * Adds a logging strategy.
+     * @param {string} name - The name of the strategy.
+     * @param {ILoggerStrategy} strategy - The logging strategy to be added.
+     * @throws {BasaltLoggerError} If a strategy with the same name already exists.
      */
-    public static addStrategy(strategy: ILoggerStrategy): void {
-        if (BasaltLogger._strategies.indexOf(strategy) !== -1)
+    public static addStrategy(name: string, strategy: ILoggerStrategy): void {
+        if (BasaltLogger._strategies.has(name))
             throw new BasaltLoggerError('Strategy already added');
-        BasaltLogger._strategies.push(strategy);
+        BasaltLogger._strategies.set(name, strategy);
     }
 
     /**
-     * Adds multiple logging strategies to the logger.
-     * @param {ILoggerStrategy[]} strategies - An array of logging strategies to add.
-     * @throws {BasaltLoggerError} - Throws an error if any of the strategies are already added.
+     * Adds multiple logging strategies.
+     * @param {[string, ILoggerStrategy][]} strategies - An array of strategies.
+     * @throws {BasaltLoggerError} If a strategy with the same name already exists.
      */
-    public static addStrategies(strategies: ILoggerStrategy[]): void {
-        for (const strategy of strategies)
-            if (BasaltLogger._strategies.indexOf(strategy) !== -1)
-                throw new BasaltLoggerError('Strategy already added for ' + strategy.constructor.name);
-        BasaltLogger._strategies.push(...strategies);
+    public static addStrategies(strategies: [string, ILoggerStrategy][]): void {
+        for (const [key, value] of strategies)
+            if (BasaltLogger._strategies.has(key))
+                throw new BasaltLoggerError('Strategy already added');
+        BasaltLogger._strategies = new Map([...BasaltLogger._strategies, ...strategies]);
     }
 
     /**
-     * Removes a logging strategy from the logger.
-     * @param {ILoggerStrategy} strategy - The logging strategy to remove.
-     * @throws {BasaltLoggerError} - Throws an error if the strategy is not found.
+     * Removes a logging strategy by name.
+     * @param {string} name - The name of the strategy to be removed.
+     * @throws {BasaltLoggerError} If the strategy is not found.
      */
-    public static removeStrategy(strategy: ILoggerStrategy): void {
-        const index: number = BasaltLogger._strategies.indexOf(strategy);
-        if (index === -1)
-            throw new BasaltLoggerError('Strategy not found for ' + strategy.constructor.name);
-        BasaltLogger._strategies.splice(index, 1);
+    public static removeStrategy(name: string): void {
+        if (!BasaltLogger._strategies.has(name))
+            throw new BasaltLoggerError('Strategy not found for ' + name);
+        BasaltLogger._strategies.delete(name);
     }
 
     /**
-     * Removes multiple logging strategies from the logger.
-     * @param {ILoggerStrategy[]} strategies - An array of logging strategies to remove.
+     * Removes multiple logging strategies by their names.
+     * @param {string[]} names - The names of the strategies to be removed.
+     * @throws {BasaltLoggerError} If any of the strategies are not found.
      */
-    public static removeStrategies(strategies: ILoggerStrategy[]): void {
-        for (const strategy of strategies)
-            BasaltLogger.removeStrategy(strategy);
+    public static removeStrategies(names: string[]): void {
+        for (const name of names)
+            if (!BasaltLogger._strategies.has(name))
+                throw new BasaltLoggerError('Strategy not found for ' + name);
+        for (const name of names)
+            BasaltLogger._strategies.delete(name);
     }
 
     /**
-     * Clears all logging strategies from the logger.
-     * @returns {void}
+     * Clears all logging strategies.
      */
     public static clearStrategies(): void {
-        BasaltLogger._strategies = [];
+        BasaltLogger._strategies.clear();
     }
 
     /**
-     * Executes all added logging strategies with the given log information.
+     * Executes the logging strategies.
      * @param {LogLevels} level - The log level.
      * @param {string} message - The log message.
-     * @param {unknown} object - Optional additional log information.
+     * @param {string[]} strategiesNames - The names of the strategies to execute.
+     * @private
      */
-    private static executeStrategies(level: LogLevels, message: string, object?: unknown): void {
-        for (const strategy of BasaltLogger._strategies)
-            strategy.log(level, message, object);
+    private static executeStrategies(level: LogLevels, message: string, strategiesNames: string[]): void {
+        for (const name of strategiesNames)
+            BasaltLogger._strategies.get(name)?.log(level, message);
     }
 
+    /**
+     * Formats a log entry.
+     * @param {LogLevels} level - The log level.
+     * @param {string} message - The log message.
+     * @param {string[]} strategiesNames - The names of the strategies.
+     * @returns {string} The formatted log entry.
+     * @private
+     */
+    private static formatLogEntry(level: LogLevels, message: string, strategiesNames: string[]): string {
+        let logMessage: string = `[${new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')}] ${message}`;
+        return JSON.stringify({
+            level,
+            message: logMessage,
+            strategies: strategiesNames
+        });
+    }
+
+    /**
+     * Stream for writing log entries.
+     * @private
+     */
     private static _logStream: Writable = new Writable({
         write: (chunk: Buffer, encoding: BufferEncoding, callback: (error?: Error | null) => void): void => {
-            const { level, message, object } = JSON.parse(chunk.toString());
-            BasaltLogger.executeStrategies(level, message, object);
+            const { level, message, strategies } = JSON.parse(chunk.toString());
+            BasaltLogger.executeStrategies(level, message, strategies);
             callback();
         }
     });
 
     /**
-     * Formats a log entry with a timestamp, message, and optional additional information.
+     * Outputs the log entry.
      * @param {LogLevels} level - The log level.
      * @param {string} message - The log message.
-     * @param {unknown} object - Optional additional log information.
-     * @returns {string} - The formatted log entry.
+     * @param {string[]} strategiesNames - The names of the strategies to output.
+     * @private
      */
-    private static formatLogEntry(level: LogLevels, message: string, object?: unknown): string {
-        let logMessage: string = `[${new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')}] ${message}`;
-        return JSON.stringify({
-            level,
-            message: logMessage,
-            object: object ?? undefined
-        });
-    }
-
-    /**
-     * Logs a message at the specified level.
-     * @param {LogLevels} level - The log level.
-     * @param {string} message - The log message.
-     * @param {unknown} object - Optional additional log information.
-     */
-    private static out(level: LogLevels, message: string, object?: unknown): void {
-        const logEntry: string = BasaltLogger.formatLogEntry(level, message, object);
+    private static out(level: LogLevels, message: string, strategiesNames: string[]): void {
+        const logEntry: string = BasaltLogger.formatLogEntry(level, message, strategiesNames);
         BasaltLogger._logStream.write(logEntry + '\n');
     }
 
     /**
      * Logs an error message.
      * @param {string} message - The error message to log.
-     * @param {unknown} object - Optional additional log information.
-     * @throws {BasaltLoggerError} - Throws an error if no strategies are added.
+     * @param {string[]} strategiesNames - The names of the strategies to output.
+     * @throws {BasaltLoggerError} If no strategies are added.
      */
-    public static error(message: string, object?: unknown): void {
-        if (BasaltLogger._strategies.length === 0)
+    public static error(message: string, strategiesNames: string[] = [...BasaltLogger._strategies.keys()]): void {
+        if (BasaltLogger._strategies.size === 0)
             throw new BasaltLoggerError('No strategies added');
-        BasaltLogger.out(LogLevels.ERROR, `ERROR : ${message}`, object);
+        BasaltLogger.out(LogLevels.ERROR, `ERROR : ${message}`, strategiesNames);
     }
 
     /**
-     * Logs a warning message.
-     * @param {string} message - The warning message to log.
-     * @param {unknown} object - Optional additional log information.
-     * @throws {BasaltLoggerError} - Throws an error if no strategies are added.
+     * Logs an warn message.
+     * @param {string} message - The error message to log.
+     * @param {string[]} strategiesNames - The names of the strategies to output.
+     * @throws {BasaltLoggerError} If no strategies are added.
      */
-    public static warn(message: string, object?: unknown): void {
-        if (BasaltLogger._strategies.length === 0)
+    public static warn(message: string, strategiesNames: string[] = [...BasaltLogger._strategies.keys()]): void {
+        if (BasaltLogger._strategies.size === 0)
             throw new BasaltLoggerError('No strategies added');
-        BasaltLogger.out(LogLevels.WARN, `WARN : ${message}`, object);
+        BasaltLogger.out(LogLevels.WARN, `WARN : ${message}`, strategiesNames);
     }
 
     /**
-     * Logs an informational message.
-     * @param {string} message - The info message to log.
-     * @param {unknown} object - Optional additional log information.
-     * @throws {BasaltLoggerError} - Throws an error if no strategies are added.
+     * Logs an info message.
+     * @param {string} message - The error message to log.
+     * @param {string[]} strategiesNames - The names of the strategies to output.
+     * @throws {BasaltLoggerError} If no strategies are added.
      */
-    public static info(message: string, object?: unknown): void {
-        if (BasaltLogger._strategies.length === 0)
+    public static info(message: string, strategiesNames: string[] = [...BasaltLogger._strategies.keys()]): void {
+        if (BasaltLogger._strategies.size === 0)
             throw new BasaltLoggerError('No strategies added');
-        BasaltLogger.out(LogLevels.INFO, `INFO : ${message}`, object);
+        BasaltLogger.out(LogLevels.INFO, `INFO : ${message}`, strategiesNames);
     }
 
     /**
-     * Logs a debug message.
-     * @param {string} message - The debug message to log.
-     * @param {unknown} object - Optional additional log information.
-     * @throws {BasaltLoggerError} - Throws an error if no strategies are added.
+     * Logs an debug message.
+     * @param {string} message - The error message to log.
+     * @param {string[]} strategiesNames - The names of the strategies to output.
+     * @throws {BasaltLoggerError} If no strategies are added.
      */
-    public static debug(message: string, object?: unknown): void {
-        if (BasaltLogger._strategies.length === 0)
+    public static debug(message: string, strategiesNames: string[] = [...BasaltLogger._strategies.keys()]): void {
+        if (BasaltLogger._strategies.size === 0)
             throw new BasaltLoggerError('No strategies added');
-        BasaltLogger.out(LogLevels.DEBUG, `DEBUG : ${message}`, object);
+        BasaltLogger.out(LogLevels.DEBUG, `DEBUG : ${message}`, strategiesNames);
     }
 
     /**
-     * Logs a general log message.
-     * @param {string} message - The log message to record.
-     * @param {unknown} object - Optional additional log information.
-     * @throws {BasaltLoggerError} - Throws an error if no strategies are added.
+     * Logs an log message.
+     * @param {string} message - The error message to log.
+     * @param {string[]} strategiesNames - The names of the strategies to output.
+     * @throws {BasaltLoggerError} If no strategies are added.
      */
-    public static log(message: string, object?: unknown): void {
-        if (BasaltLogger._strategies.length === 0)
+    public static log(message: string, strategiesNames: string[] = [...BasaltLogger._strategies.keys()]): void {
+        if (BasaltLogger._strategies.size === 0)
             throw new BasaltLoggerError('No strategies added');
-        BasaltLogger.out(LogLevels.LOG, `LOG : ${message}`, object);
+        BasaltLogger.out(LogLevels.LOG, `LOG : ${message}`, strategiesNames);
     }
 }
