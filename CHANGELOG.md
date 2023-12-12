@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.3.0](https://github.com/Basalt-Lab/basalt-logger/compare/v1.2.0...v1.3.0) (2023-12-12)
+
+
+### Features
+
+* add getter for strategies ([09b6cfd](https://github.com/Basalt-Lab/basalt-logger/commit/09b6cfd0c45265e094c809caca54bcfcfc11a11d))
+
+
+### Tests
+
+* add units tests ([52df8b7](https://github.com/Basalt-Lab/basalt-logger/commit/52df8b7444cac534b5346b57ecb6db3d5eea82c7))
+
 ## [1.2.0](https://github.com/Basalt-Lab/basalt-logger/compare/v1.1.0...v1.2.0) (2023-11-26)
 
 
