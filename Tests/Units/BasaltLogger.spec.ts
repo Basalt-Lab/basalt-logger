@@ -10,6 +10,16 @@ describe('BasaltLogger', (): void => {
         BasaltLogger.clearStrategies();
     });
 
+    describe(('get strategies'), (): void => {
+        test('should return a Map<string, ILoggerStrategy>', (): void => {
+            expect(BasaltLogger.strategies).toBeInstanceOf(Map);
+        });
+
+        test('should return a Map<string, ILoggerStrategy> with size 0', (): void => {
+            expect(BasaltLogger.strategies.size).toEqual(0);
+        });
+    });
+
     describe('addStrategy', (): void => {
         test('should add a logging strategy', (): void => {
             BasaltLogger.addStrategy('mockStrategy', mockStrategy);
