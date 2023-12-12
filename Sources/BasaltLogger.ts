@@ -15,6 +15,14 @@ export class BasaltLogger {
     private static _strategies: Map<string, ILoggerStrategy> = new Map<string, ILoggerStrategy>();
 
     /**
+     * Gets the logging strategies.
+     * @returns {Map<string, ILoggerStrategy>} The logging strategies.
+     */
+    public static get strategies(): Map<string, ILoggerStrategy> {
+        return BasaltLogger._strategies;
+    }
+
+    /**
      * Adds a logging strategy.
      * @param {string} name - The name of the strategy.
      * @param {ILoggerStrategy} strategy - The logging strategy to be added.
