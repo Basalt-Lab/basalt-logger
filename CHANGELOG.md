@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.4.0](https://github.com/Basalt-Lab/basalt-logger/compare/v1.3.0...v1.4.0) (2023-12-18)
+
+
+### Features
+
+* possibility to log an object + create a new strategy is more flex ([093e5ca](https://github.com/Basalt-Lab/basalt-logger/commit/093e5ca4bbd0eb43f2bfc00724934069b5a76113))
+
+
+### Build System
+
+* update version and package ([5aca607](https://github.com/Basalt-Lab/basalt-logger/commit/5aca607be8afed4980f095fa9088cc065a3462da))
+
+
+### Tests
+
+* correction and add new tests ([01e762a](https://github.com/Basalt-Lab/basalt-logger/commit/01e762ad26c673e18b8e79cb2f5d81144c3ead85))
+
 ## [1.3.0](https://github.com/Basalt-Lab/basalt-logger/compare/v1.2.0...v1.3.0) (2023-12-12)
 
 
