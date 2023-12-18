@@ -20,7 +20,7 @@ async function run() {
         color: true,
         plugins: [
             alias({
-                "@/*": join(basePath, "/*"),
+                "@/*": join(basePath, "Sources/*"),
             }),
         ]
     };
