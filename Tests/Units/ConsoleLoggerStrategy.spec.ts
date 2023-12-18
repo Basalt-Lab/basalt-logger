@@ -28,9 +28,18 @@ describe('ConsoleLoggerStrategy', (): void => {
 
     logLevels.forEach((level: LogLevels): void => {
         test(`should log a ${level} message`, (): void => {
-            strategy.log(level, 'test');
+            const date: string = `[${new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')}]`;
+            strategy.log(level, date, 'hello world');
             const mockMethod = mockConsole[level.toLowerCase() as keyof Console];
-            expect(mockMethod).toHaveBeenCalledWith('test');
+            expect(mockMethod).toHaveBeenCalledWith(`${date} ${level} : hello world`);
+        });
+
+        test(`should log a ${level} object`, (): void => {
+            const date: string = `[${new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')}]`;
+            const object: object = { hello: 'world' };
+            strategy.log(level, date, object);
+            const mockMethod = mockConsole[level.toLowerCase() as keyof Console];
+            expect(mockMethod).toHaveBeenCalledWith(`${date} ${level} : ${JSON.stringify(object)}`);
         });
     });
 });
