@@ -28,18 +28,21 @@ describe('ConsoleLoggerStrategy', (): void => {
 
     logLevels.forEach((level: LogLevels): void => {
         test(`should log a ${level} message`, (): void => {
-            const date: string = `[${new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')}]`;
+            const date: Date = new Date();
+            const prefixDate: string = `[${date.toISOString().replace(/T/, ' ').replace(/\..+/, '')}]`;
             strategy.log(level, date, 'hello world');
             const mockMethod = mockConsole[level.toLowerCase() as keyof Console];
-            expect(mockMethod).toHaveBeenCalledWith(`${date} ${level} : hello world`);
+            expect(mockMethod).toHaveBeenCalledWith(`${prefixDate} ${level} : hello world`);
         });
 
         test(`should log a ${level} object`, (): void => {
-            const date: string = `[${new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')}]`;
+            const date: Date = new Date();
+            const prefixDate: string = `[${date.toISOString().replace(/T/, ' ').replace(/\..+/, '')}]`;
+
             const object: object = { hello: 'world' };
             strategy.log(level, date, object);
             const mockMethod = mockConsole[level.toLowerCase() as keyof Console];
-            expect(mockMethod).toHaveBeenCalledWith(`${date} ${level} : ${JSON.stringify(object)}`);
+            expect(mockMethod).toHaveBeenCalledWith(`${prefixDate} ${level} : ${JSON.stringify(object)}`);
         });
     });
 });
