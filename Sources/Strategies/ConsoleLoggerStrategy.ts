@@ -9,10 +9,11 @@ export class ConsoleLoggerStrategy implements ILoggerStrategy {
     /**
      * Logs a message to the console with the specified log level.
      * @param {LogLevels} level - The log level at which the message should be logged.
-     * @param prefixDate
-     * @param object
+     * @param {Date} date - The date at which the message was logged.
+     * @param {unknown} object - The object to log.
      */
-    public log(level: LogLevels, prefixDate: string, object: unknown): void {
+    public log(level: LogLevels, date: Date, object: unknown): void {
+        const prefixDate: string = `[${date.toISOString().replace(/T/, ' ').replace(/\..+/, '')}]`;
         const sanitizedObject: string = typeof object === 'string' ? object : JSON.stringify(object);
         const message: string = `${prefixDate} ${level} : ${sanitizedObject}`;
         switch (level) {

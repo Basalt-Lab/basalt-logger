@@ -80,14 +80,14 @@ export class BasaltLogger {
     /**
      * Executes the logging strategies.
      * @param {LogLevels} level - The log level.
-     * @param prefixDate - The date prefix.
-     * @param object - The object to log.
+     * @param {Date} date - The date of the log entry.
+     * @param {unknown} object - The object to log.
      * @param {string[]} strategiesNames - The names of the strategies to execute.
      * @private
      */
-    private static executeStrategies(level: LogLevels, prefixDate: string, object: unknown, strategiesNames: string[]): void {
+    private static executeStrategies(level: LogLevels, date: Date, object: unknown, strategiesNames: string[]): void {
         for (const name of strategiesNames)
-            BasaltLogger._strategies.get(name)?.log(level, prefixDate, object);
+            BasaltLogger._strategies.get(name)?.log(level, date, object);
     }
 
     /**
@@ -97,12 +97,12 @@ export class BasaltLogger {
     private static _logStream: Writable = new Writable({
         write: (chunk: Buffer, encoding: BufferEncoding, callback: (error?: Error | null) => void): void => {
             const {
-                prefixDate,
+                date,
                 level,
                 object,
                 strategiesNames
             } = JSON.parse(chunk.toString());
-            BasaltLogger.executeStrategies(level, prefixDate, object, strategiesNames);
+            BasaltLogger.executeStrategies(level, date, object, strategiesNames);
             callback();
         }
     });
@@ -110,13 +110,13 @@ export class BasaltLogger {
     /**
      * Outputs the log entry.
      * @param {LogLevels} level - The log level.
-     * @param object - The object to log.
+     * @param {unknown} object - The object to log.
      * @param {string[]} strategiesNames - The names of the strategies to output.
      * @private
      */
     private static out(level: LogLevels, object: unknown, strategiesNames: string[] = [...BasaltLogger._strategies.keys()]): void {
         BasaltLogger._logStream.write(JSON.stringify({
-            prefixDate: `[${new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')}]`,
+            date: new Date().toISOString(),
             level,
             object,
             strategiesNames
@@ -125,7 +125,7 @@ export class BasaltLogger {
 
     /**
      * Logs an error message.
-     * @param object - The object to log.
+     * @param {unknown} object - The object to log.
      * @param {string[]} strategiesNames - The names of the strategies to output.
      * @throws {BasaltLoggerError} If no strategies are added.
      */
@@ -137,7 +137,7 @@ export class BasaltLogger {
 
     /**
      * Logs an warn message.
-     * @param object - The object to log.
+     * @param {unknown} object - The object to log.
      * @param {string[]} strategiesNames - The names of the strategies to output.
      * @throws {BasaltLoggerError} If no strategies are added.
      */
@@ -149,7 +149,7 @@ export class BasaltLogger {
 
     /**
      * Logs an info message.
-     * @param object - The object to log.
+     * @param {unknown} object - The object to log.
      * @param {string[]} strategiesNames - The names of the strategies to output.
      * @throws {BasaltLoggerError} If no strategies are added.
      */
@@ -161,7 +161,7 @@ export class BasaltLogger {
 
     /**
      * Logs an debug message.
-     * @param object - The object to log.
+     * @param {unknown} object - The object to log.
      * @param {string[]} strategiesNames - The names of the strategies to output.
      * @throws {BasaltLoggerError} If no strategies are added.
      */
@@ -173,7 +173,7 @@ export class BasaltLogger {
 
     /**
      * Logs an log message.
-     * @param object - The object to log.
+     * @param {unknown} object - The object to log.
      * @param {string[]} strategiesNames - The names of the strategies to output.
      * @throws {BasaltLoggerError} If no strategies are added.
      */
