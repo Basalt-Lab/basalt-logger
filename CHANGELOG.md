@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.5.0](https://github.com/Basalt-Lab/basalt-logger/compare/v1.4.0...v1.5.0) (2023-12-27)
+
+
+### Features
+
+* change prefixDate to date ([7bede12](https://github.com/Basalt-Lab/basalt-logger/commit/7bede12adb5ab472019e0675a7e67942df302ea0))
+
+
+### Tests
+
+* update test for changement prefixDate to date ([4bbfb95](https://github.com/Basalt-Lab/basalt-logger/commit/4bbfb95d954b63cfd4776628a0b7f8895e003ce4))
+
 ## [1.4.0](https://github.com/Basalt-Lab/basalt-logger/compare/v1.3.0...v1.4.0) (2023-12-18)
 
 
