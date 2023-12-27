@@ -23,9 +23,10 @@ describe('FileLoggerStrategy', (): void => {
         [LogLevels.DEBUG, 'Debug message'],
         [LogLevels.LOG, 'Log message']
     ])('should log a %s message', (level, message): void => {
-        const date: string = `[${new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')}]`;
+        const date: Date = new Date();
+        const prefixDate: string = `[${date.toISOString().replace(/T/, ' ').replace(/\..+/, '')}]`;
         fileLogger.log(level, date, message);
-        expect(appendFile).toHaveBeenCalledWith(`${testPath}`, `${date} ${level} : ${message}\n`, expect.any(Function));
+        expect(appendFile).toHaveBeenCalledWith(`${testPath}`, `${prefixDate} ${level} : ${message}\n`, expect.any(Function));
     });
 
     test.each([
@@ -35,10 +36,11 @@ describe('FileLoggerStrategy', (): void => {
         [LogLevels.DEBUG, 'Debug message'],
         [LogLevels.LOG, 'Log message']
     ])(`should log a %s object`, (level, message): void => {
-        const date: string = `[${new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')}]`;
+        const date: Date = new Date();
+        const prefixDate: string = `[${date.toISOString().replace(/T/, ' ').replace(/\..+/, '')}]`;
         const object: object = { hello: 'world' };
         fileLogger.log(level, date, object);
-        expect(appendFile).toHaveBeenCalledWith(`${testPath}`, `${date} ${level} : ${JSON.stringify(object)}\n`, expect.any(Function));
+        expect(appendFile).toHaveBeenCalledWith(`${testPath}`, `${prefixDate} ${level} : ${JSON.stringify(object)}\n`, expect.any(Function));
     });
 
     test('should throw an error when the file cannot be written to', (): void => {
@@ -46,7 +48,7 @@ describe('FileLoggerStrategy', (): void => {
         (appendFile as unknown as jest.Mock).mockImplementationOnce((path, message, callback): void => {
             callback(mockError);
         });
-        const date: string = `[${new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')}]`;
+        const date: Date = new Date();
         expect((): void => {
             fileLogger.log(LogLevels.ERROR, date, 'Error message');
         }).toThrow(mockError);
