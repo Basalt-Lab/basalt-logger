@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.5.1](https://github.com/Basalt-Lab/basalt-logger/compare/v1.5.0...v1.5.1) (2024-01-16)
+
+
+### Bug Fixes
+
+* recreate date object ([abcd6f7](https://github.com/Basalt-Lab/basalt-logger/commit/abcd6f7d3c522c22cd740806edf94080c3b45e68))
+
+
+### Tests
+
+* correction units tests ([a1ab0be](https://github.com/Basalt-Lab/basalt-logger/commit/a1ab0be22b2cf64fdfcc6774c3ea424791a9d9bd))
+
 ## [1.5.0](https://github.com/Basalt-Lab/basalt-logger/compare/v1.4.0...v1.5.0) (2023-12-27)
 
 
