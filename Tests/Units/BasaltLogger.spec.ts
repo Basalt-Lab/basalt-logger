@@ -103,12 +103,12 @@ describe('BasaltLogger', (): void => {
                 const levelMethod = BasaltLogger[levelMethodString as keyof typeof BasaltLogger] as (object: unknown, strategiesNames?: string[]) => void;
                 levelMethod('Test Message');
 
-                expect(mockStrategy.log).toHaveBeenCalledWith(level, expect.any(String), expect.stringContaining('Test Message'));
-                expect(mockStrategy.log).toHaveBeenCalledWith(level, expect.any(String), expect.any(String));
-                expect(mockConsoleLoggerStrategy.log).toHaveBeenCalledWith(level, expect.any(String), expect.stringContaining('Test Message'));
-                expect(mockConsoleLoggerStrategy.log).toHaveBeenCalledWith(level, expect.any(String), expect.any(String));
-                expect(mockFileLoggerStrategy.log).toHaveBeenCalledWith(level, expect.any(String), expect.stringContaining('Test Message'));
-                expect(mockFileLoggerStrategy.log).toHaveBeenCalledWith(level, expect.any(String), expect.any(String));
+                expect(mockStrategy.log).toHaveBeenCalledWith(level, expect.any(Date), expect.stringContaining('Test Message'));
+                expect(mockStrategy.log).toHaveBeenCalledWith(level, expect.any(Date), expect.any(String));
+                expect(mockConsoleLoggerStrategy.log).toHaveBeenCalledWith(level, expect.any(Date), expect.stringContaining('Test Message'));
+                expect(mockConsoleLoggerStrategy.log).toHaveBeenCalledWith(level, expect.any(Date), expect.any(String));
+                expect(mockFileLoggerStrategy.log).toHaveBeenCalledWith(level, expect.any(Date), expect.stringContaining('Test Message'));
+                expect(mockFileLoggerStrategy.log).toHaveBeenCalledWith(level, expect.any(Date), expect.any(String));
             });
 
             test(`should log a ${level} message in the specified strategies`, (): void => {
@@ -122,10 +122,10 @@ describe('BasaltLogger', (): void => {
                 const levelMethod = BasaltLogger[levelMethodString as keyof typeof BasaltLogger] as (object: unknown, strategiesNames?: string[]) => void;
                 levelMethod('Test Message', ['mockStrategy', 'console']);
 
-                expect(mockStrategy.log).toHaveBeenCalledWith(level, expect.any(String), expect.any(String));
-                expect(mockStrategy.log).toHaveBeenCalledWith(level, expect.any(String), expect.stringContaining('Test Message'));
-                expect(mockConsoleLoggerStrategy.log).toHaveBeenCalledWith(level, expect.any(String), expect.any(String));
-                expect(mockConsoleLoggerStrategy.log).toHaveBeenCalledWith(level, expect.any(String), expect.stringContaining('Test Message'));
+                expect(mockStrategy.log).toHaveBeenCalledWith(level, expect.any(Date), expect.any(String));
+                expect(mockStrategy.log).toHaveBeenCalledWith(level, expect.any(Date), expect.stringContaining('Test Message'));
+                expect(mockConsoleLoggerStrategy.log).toHaveBeenCalledWith(level, expect.any(Date), expect.any(String));
+                expect(mockConsoleLoggerStrategy.log).toHaveBeenCalledWith(level, expect.any(Date), expect.stringContaining('Test Message'));
                 expect(mockFileLoggerStrategy.log).not.toHaveBeenCalled();
             });
 
