@@ -102,7 +102,7 @@ export class BasaltLogger {
                 object,
                 strategiesNames
             } = JSON.parse(chunk.toString());
-            BasaltLogger.executeStrategies(level, date, object, strategiesNames);
+            BasaltLogger.executeStrategies(level, new Date(date), object, strategiesNames);
             callback();
         }
     });
