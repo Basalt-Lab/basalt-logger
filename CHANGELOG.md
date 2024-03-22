@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.6.1](https://github.com/Basalt-Lab/basalt-logger/compare/v1.6.0...v1.6.1) (2024-03-22)
+
+
+### Bug Fixes
+
+* correction npmignore ([2921a75](https://github.com/Basalt-Lab/basalt-logger/commit/2921a7512479e51144c83b77277788bd5f291eaa))
+
+
+### Continuous Integration
+
+* update workflows ([ca3b997](https://github.com/Basalt-Lab/basalt-logger/commit/ca3b99766fd721a4f65bc59024f5cca60cff95db))
+
+
+### Documentation
+
+* update readme ([d48ef5f](https://github.com/Basalt-Lab/basalt-logger/commit/d48ef5fdb13789952e6b6e69de1a540ab707720e))
+
 ## [1.6.0](https://github.com/Basalt-Lab/basalt-logger/compare/v1.5.1...v1.6.0) (2024-03-22)
 
 
