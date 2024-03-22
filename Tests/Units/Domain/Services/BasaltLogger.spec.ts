@@ -32,7 +32,7 @@ describe('BasaltLogger', (): void => {
             BasaltLogger.addStrategy('mockStrategy', mockStrategy);
             expect((): void => {
                 BasaltLogger.addStrategy('mockStrategy', mockStrategy);
-            }).toThrow('Strategy already added');
+            }).toThrow('STRATEGY_ALREADY_ADDED');
         });
     });
 
@@ -48,7 +48,7 @@ describe('BasaltLogger', (): void => {
             BasaltLogger.addStrategy('mockStrategy', mockStrategy);
             expect((): void => {
                 BasaltLogger.addStrategies([['mockStrategy', mockStrategy]]);
-            }).toThrow('Strategy already added');
+            }).toThrow('STRATEGY_ALREADY_ADDED');
         });
     });
 
@@ -62,7 +62,7 @@ describe('BasaltLogger', (): void => {
         test('should throw an error when removing a non-existent strategy', (): void => {
             expect((): void => {
                 BasaltLogger.removeStrategy('mockStrategy');
-            }).toThrow('Strategy not found for mockStrategy');
+            }).toThrow('STRATEGY_NOT_FOUND');
         });
     });
 
@@ -78,7 +78,7 @@ describe('BasaltLogger', (): void => {
         test('should throw an error when removing a non-existent strategy', (): void => {
             expect((): void => {
                 BasaltLogger.removeStrategies(['mockStrategy']);
-            }).toThrow('Strategy not found for mockStrategy');
+            }).toThrow('STRATEGY_NOT_FOUND');
         });
     });
 
@@ -134,7 +134,7 @@ describe('BasaltLogger', (): void => {
                 const levelMethod = BasaltLogger[levelMethodString as keyof typeof BasaltLogger] as (message: string) => void;
                 expect((): void => {
                     levelMethod('Test Message');
-                }).toThrow('No strategies added');
+                }).toThrow('NO_STRATEGY_ADDED');
             });
         });
     });
