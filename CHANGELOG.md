@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.6.0](https://github.com/Basalt-Lab/basalt-logger/compare/v1.5.1...v1.6.0) (2024-03-22)
+
+
+### Features
+
+* Update build env ([ccb320b](https://github.com/Basalt-Lab/basalt-logger/commit/ccb320b355ae497b0c42acc6ea9c5e5ae02be349))
+
+
+### Code Refactoring
+
+* improvement of archi ([8c1d116](https://github.com/Basalt-Lab/basalt-logger/commit/8c1d116f95cd15ac36fee43ed061bf8a5b26dbc3))
+
+
+### Tests
+
+* add test + improvements ([1457713](https://github.com/Basalt-Lab/basalt-logger/commit/1457713a365de8e6769a322fc2f823509c66fe0f))
+
 ## [1.5.1](https://github.com/Basalt-Lab/basalt-logger/compare/v1.5.0...v1.5.1) (2024-01-16)
 
 
