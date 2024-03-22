@@ -1,7 +1,6 @@
 import { appendFile } from 'fs';
 
-import { FileLoggerStrategy } from '@/App';
-import { LogLevels } from '@/Enums';
+import { FileLoggerStrategy, LogLevels } from '@/App';
 
 jest.mock('fs', () => ({
     appendFile: jest.fn()
@@ -35,7 +34,7 @@ describe('FileLoggerStrategy', (): void => {
         [LogLevels.INFO, 'Info message'],
         [LogLevels.DEBUG, 'Debug message'],
         [LogLevels.LOG, 'Log message']
-    ])(`should log a %s object`, (level, message): void => {
+    ])(`should log a %s object`, (level): void => {
         const date: Date = new Date();
         const prefixDate: string = `[${date.toISOString().replace(/T/, ' ').replace(/\..+/, '')}]`;
         const object: object = { hello: 'world' };
@@ -45,7 +44,7 @@ describe('FileLoggerStrategy', (): void => {
 
     test('should throw an error when the file cannot be written to', (): void => {
         const mockError: Error = new Error('test error');
-        (appendFile as unknown as jest.Mock).mockImplementationOnce((path, message, callback): void => {
+        (appendFile as unknown as jest.Mock).mockImplementationOnce((_path, _message, callback): void => {
             callback(mockError);
         });
         const date: Date = new Date();
