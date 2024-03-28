@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.6.2](https://github.com/Basalt-Lab/basalt-logger/compare/v1.6.1...v1.6.2) (2024-03-28)
+
+
+### Build System
+
+* update packages + add comment to bundle ([f5d2dbd](https://github.com/Basalt-Lab/basalt-logger/commit/f5d2dbdfee5327a6e8379c5b51341717533a9f61))
+
+
+### Continuous Integration
+
+* change node version to workflow file ([f8a1471](https://github.com/Basalt-Lab/basalt-logger/commit/f8a1471304c1e14667ef1df8db15d7e40d7aa14d))
+
 ## [1.6.1](https://github.com/Basalt-Lab/basalt-logger/compare/v1.6.0...v1.6.1) (2024-03-22)
 
 
