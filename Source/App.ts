@@ -1,6 +1,8 @@
 export * from '@/Common/Errors';
-export * from '@/Domain/Services';
-export * from '@/Domain/Services/Enums';
-export * from '@/Domain/Services/Interfaces';
-export * from '@/Domain/Services/Strategies';
+export * from '@/Common/Errors/Enum';
+export * from '@/Common/Interface';
+export * from '@/Domain/Service';
+export * from '@/Domain/Service/Enum';
+export * from '@/Domain/Service/Interface';
+export * from '@/Domain/Service/Strategy';
 

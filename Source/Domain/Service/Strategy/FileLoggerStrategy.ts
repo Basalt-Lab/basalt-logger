@@ -1,21 +1,21 @@
 import { appendFile } from 'fs';
 
-import { type LogLevels } from '@/Domain/Services/Enums';
-import { type ILoggerStrategy } from '@/Domain/Services/Interfaces';
+import type { LogLevels } from '@/Domain/Service/Enum';
+import type { ILoggerStrategy } from '@/Domain/Service/Interface';
 
 /**
- * FileLoggerStrategy implements ILoggerStrategy to provide logging functionality to the file system.
+ * FileLoggerStrategy implements ILoggerStrategy to provide logging functionality to the file system. ({@link ILoggerStrategy})
  */
 export class FileLoggerStrategy implements ILoggerStrategy {
 
     /**
      * Path to the file to log to.
-     * @readonly _path
      */
     private readonly _path: string;
 
     /**
      * Constructor FileLoggerStrategy
+     *
      * @param path - Path to the file to log to.
      */
     public constructor(path: string) {
@@ -24,6 +24,7 @@ export class FileLoggerStrategy implements ILoggerStrategy {
 
     /**
      * Logs a message to the file system with the specified log level.
+     *
      * @param level - The log level at which the message should be logged. {@link LogLevels}
      * @param date - The date at which the message was logged.
      * @param object - The object to log.
