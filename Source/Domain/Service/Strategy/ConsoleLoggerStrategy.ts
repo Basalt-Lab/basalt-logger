@@ -1,14 +1,15 @@
-import { type ILoggerStrategy } from '@/Domain/Services/Interfaces';
-import { LogLevels } from '@/Domain/Services/Enums';
+import { LogLevels } from '@/Domain/Service/Enum';
+import type { ILoggerStrategy } from '@/Domain/Service/Interface';
 
 /**
- * ConsoleLoggerStrategy implements ILoggerStrategy to provide logging functionality to the console.
+ * ConsoleLoggerStrategy implements ILoggerStrategy to provide logging functionality to the console. ({@link ILoggerStrategy})
  */
 export class ConsoleLoggerStrategy implements ILoggerStrategy {
 
     /**
      * Logs a message to the console with the specified log level.
-     * @param level - The log level at which the message should be logged. {@link LogLevels}
+     *
+     * @param level - The log level at which the message should be logged. ({@link LogLevels})
      * @param date - The date at which the message was logged.
      * @param object - The object to log.
      */
