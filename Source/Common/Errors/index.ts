@@ -1,3 +1,2 @@
-export * from './ErrorBasaltLogger';
-export * from './ErrorEntity';
+export * from './BasaltError';
 
