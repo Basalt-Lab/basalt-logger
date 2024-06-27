@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.0](https://github.com/Basalt-Lab/basalt-logger/compare/v1.6.2...v1.7.0) (2024-06-27)
+
+
+### Features
+
+* cjs to esm + imrpovement ... ([10884a9](https://github.com/Basalt-Lab/basalt-logger/commit/10884a9d53169a93485280aa16e085db8016626e))
+
 ## [1.6.2](https://github.com/Basalt-Lab/basalt-logger/compare/v1.6.1...v1.6.2) (2024-03-28)
 
 
