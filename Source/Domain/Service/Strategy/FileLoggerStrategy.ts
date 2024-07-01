@@ -1,7 +1,7 @@
 import { appendFile } from 'fs';
 
-import type { LogLevels } from '@/Domain/Service/Enum';
-import type { ILoggerStrategy } from '@/Domain/Service/Interface';
+import type { LogLevels } from '@/Domain/Service/Enum/index.js';
+import type { ILoggerStrategy } from '@/Domain/Service/Interface/index.js';
 
 /**
  * FileLoggerStrategy implements ILoggerStrategy to provide logging functionality to the file system. ({@link ILoggerStrategy})
