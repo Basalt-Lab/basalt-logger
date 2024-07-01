@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.1](https://github.com/Basalt-Lab/basalt-logger/compare/v1.7.0...v1.7.1) (2024-07-01)
+
+
+### Code Refactoring
+
+* improve to esm ([243f34b](https://github.com/Basalt-Lab/basalt-logger/commit/243f34b8868e57826709911c9e2967bab63f95f8))
+
 ## [1.7.0](https://github.com/Basalt-Lab/basalt-logger/compare/v1.6.2...v1.7.0) (2024-06-27)
 
 
