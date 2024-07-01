@@ -1,1 +1,1 @@
-export * from './BasaltLogger';
+export * from './BasaltLogger.js';
