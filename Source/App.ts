@@ -1,8 +1,8 @@
-export * from '@/Common/Errors';
-export * from '@/Common/Errors/Enum';
-export * from '@/Common/Interface';
-export * from '@/Domain/Service';
-export * from '@/Domain/Service/Enum';
-export * from '@/Domain/Service/Interface';
-export * from '@/Domain/Service/Strategy';
+export * from '@/Common/Errors/index.js';
+export * from '@/Common/Errors/Enum/index.js';
+export * from '@/Common/Interface/index.js';
+export * from '@/Domain/Service/index.js';
+export * from '@/Domain/Service/Enum/index.js';
+export * from '@/Domain/Service/Interface/index.js';
+export * from '@/Domain/Service/Strategy/index.js';
 

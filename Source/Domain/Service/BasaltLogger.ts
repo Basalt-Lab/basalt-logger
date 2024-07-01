@@ -1,9 +1,9 @@
 import { Writable } from 'stream';
 
-import { BasaltError } from '@/Common/Errors';
-import { ServiceErrorKeys } from '@/Common/Errors/Enum';
-import { LogLevels } from '@/Domain/Service/Enum';
-import type { ILoggerStrategy } from '@/Domain/Service/Interface';
+import { BasaltError } from '@/Common/Errors/index.js';
+import { ServiceErrorKeys } from '@/Common/Errors/Enum/index.js';
+import { LogLevels } from '@/Domain/Service/Enum/index.js';
+import type { ILoggerStrategy } from '@/Domain/Service/Interface/index.js';
 
 /**
  * Interface for the log stream object.

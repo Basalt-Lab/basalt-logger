@@ -1,6 +1,6 @@
 import { randomUUID } from 'crypto';
 
-import type { IBasaltErrorOptions } from '@/Common/Interface';
+import type { IBasaltErrorOptions } from '@/Common/Interface/index.js';
 
 /**
  * BasaltError is a class that represents an error entity with a unique identifier.

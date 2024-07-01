@@ -1,5 +1,5 @@
-import { LogLevels } from '@/Domain/Service/Enum';
-import type { ILoggerStrategy } from '@/Domain/Service/Interface';
+import { LogLevels } from '@/Domain/Service/Enum/index.js';
+import type { ILoggerStrategy } from '@/Domain/Service/Interface/index.js';
 
 /**
  * ConsoleLoggerStrategy implements ILoggerStrategy to provide logging functionality to the console. ({@link ILoggerStrategy})

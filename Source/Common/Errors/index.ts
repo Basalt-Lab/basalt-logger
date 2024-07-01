@@ -1,2 +1,2 @@
-export * from './BasaltError';
+export * from './BasaltError.js';
 

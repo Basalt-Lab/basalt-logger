@@ -1,1 +1,1 @@
-export * from './ILoggerStrategy';
+export * from './ILoggerStrategy.js';

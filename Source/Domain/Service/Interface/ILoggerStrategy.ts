@@ -1,4 +1,4 @@
-import type { LogLevels } from '@/Domain/Service/Enum';
+import type { LogLevels } from '@/Domain/Service/Enum/index.js';
 
 export interface ILoggerStrategy {
     /**
