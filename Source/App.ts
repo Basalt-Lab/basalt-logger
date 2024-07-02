@@ -1,5 +1,5 @@
-export * from '@/Common/Errors/index.js';
-export * from '@/Common/Errors/Enum/index.js';
+export * from '@/Common/Error/index.js';
+export * from '@/Common/Error/Enum/index.js';
 export * from '@/Common/Interface/index.js';
 export * from '@/Domain/Service/index.js';
 export * from '@/Domain/Service/Enum/index.js';

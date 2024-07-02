@@ -1,7 +1,7 @@
 import { Writable } from 'stream';
 
-import { BasaltError } from '@/Common/Errors/index.js';
-import { ServiceErrorKeys } from '@/Common/Errors/Enum/index.js';
+import { BasaltError } from '@/Common/Error/index.js';
+import { ServiceErrorKeys } from '@/Common/Error/Enum/index.js';
 import { LogLevels } from '@/Domain/Service/Enum/index.js';
 import type { ILoggerStrategy } from '@/Domain/Service/Interface/index.js';
 
