@@ -11,9 +11,7 @@
     "build": "npm run clear && tsc --noEmit && npm run create-types && node ./Configs/esbuild.config",
     "docs": "typedoc",
     "fix-lint": "eslint --fix . --ext .ts",
-    "lint": "eslint . --ext .ts",
-    "test:watch": "jest --watch -c jest.config.json",
-    "test": "jest -c jest.config.json --ci --coverage"
+    "lint": "eslint . --ext .ts"
   },
   "repository": {
     "type": "git",
@@ -31,16 +29,16 @@
   },
   "homepage": "https://github.com/Basalt-Lab/basalt-logger#readme",
   "devDependencies": {
-    "@types/jest": "^29.5.12",
-    "@types/node": "^20.11.29",
-    "@typescript-eslint/eslint-plugin": "^6.21.0",
-    "@typescript-eslint/parser": "^6.21.0",
-    "esbuild": "^0.19.12",
+    "@types/node": "^20.14.10",
+    "@typescript-eslint/eslint-plugin": "^7.15.0",
+    "@typescript-eslint/parser": "^7.16.0",
+    "esbuild": "^0.23.0",
     "eslint": "^8.57.0",
-    "eslint-plugin-tsdoc": "^0.2.17",
-    "tsc-alias": "^1.8.8",
-    "tslib": "^2.6.2",
-    "typedoc": "^0.25.12",
-    "typescript": "^5.4.2"
+    "eslint-plugin-tsdoc": "^0.3.0",
+    "tsc-alias": "^1.8.10",
+    "tslib": "^2.6.3",
+    "typedoc": "^0.26.4",
+    "typescript": "^5.5.3"
   }
 }
+  
