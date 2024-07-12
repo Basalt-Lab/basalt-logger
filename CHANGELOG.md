@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.2](https://github.com/Basalt-Lab/basalt-logger/compare/v1.7.1...v1.7.2) (2024-07-12)
+
+
+### Build System
+
+* update dependencies ([0abd07c](https://github.com/Basalt-Lab/basalt-logger/commit/0abd07c7fe9ff393d63ebf6667f3b67806c0e958))
+
 ## [1.7.1](https://github.com/Basalt-Lab/basalt-logger/compare/v1.7.0...v1.7.1) (2024-07-01)
 
 
