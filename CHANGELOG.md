@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.0](https://github.com/Basalt-Lab/basalt-logger/compare/v1.7.3...v1.8.0) (2024-08-13)
+
+
+### Features
+
+* add name to BasaltError ([12dc704](https://github.com/Basalt-Lab/basalt-logger/commit/12dc70414c50a7379d082db15b74653260b69414))
+
 ## [1.7.3](https://github.com/Basalt-Lab/basalt-logger/compare/v1.7.2...v1.7.3) (2024-08-13)
 
 
