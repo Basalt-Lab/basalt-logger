@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.7.3](https://github.com/Basalt-Lab/basalt-logger/compare/v1.7.2...v1.7.3) (2024-08-13)
+
+
+### Code Refactoring
+
+* change error value for i18n ([b3a01d5](https://github.com/Basalt-Lab/basalt-logger/commit/b3a01d59d19256e32e43c01f2cfbf6fccaa4388a))
+
+
+### Build System
+
+* update dependencies and node version ([c3c42d7](https://github.com/Basalt-Lab/basalt-logger/commit/c3c42d796d95d45929d62e5f148788de7ef1ad1f))
+
 ## [1.7.2](https://github.com/Basalt-Lab/basalt-logger/compare/v1.7.1...v1.7.2) (2024-07-12)
 
 
