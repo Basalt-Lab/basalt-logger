@@ -1,7 +1,6 @@
 import { Writable } from 'stream';
 
-import { BasaltError } from '@/Common/Error/index.js';
-import { DomainErrorKeys } from '@/Common/Error/Enum/index.js';
+import { BasaltError, ErrorKeys } from '@/Common/Error/index.js';
 import { LogLevels } from '@/Domain/Service/Enum/index.js';
 import type { ILoggerStrategy } from '@/Domain/Service/Interface/index.js';
 
@@ -47,15 +46,15 @@ export class BasaltLogger {
     /**
      * Adds a logging strategy.
      *
-     * @param name - The name of the strategy.
+     * @param name - The name o                                 f the strategy.
      * @param strategy - The logging strategy to be added. ({@link ILoggerStrategy})
      *
-     * @throws ({@link BasaltError}) If a strategy with the same name already exists. ({@link DomainErrorKeys.STRATEGY_ALREADY_ADDED})
+     * @throws ({@link BasaltError}) If a strategy with the same name already exists. ({@link ErrorKeys.STRATEGY_ALREADY_ADDED})
      */
     public addStrategy(name: string, strategy: ILoggerStrategy): void {
         if (this._strategies.has(name))
             throw new BasaltError({
-                messageKey: DomainErrorKeys.STRATEGY_ALREADY_ADDED,
+                messageKey: ErrorKeys.STRATEGY_ALREADY_ADDED,
                 detail: {
                     strategyName: name
                 }
@@ -68,13 +67,13 @@ export class BasaltLogger {
      *
      * @param strategies - An array of strategies. Each element is a tuple with the name of the strategy and the strategy itself. [name, strategy] ({@link ILoggerStrategy})
      *
-     * @throws ({@link BasaltError}) If a strategy with the same name already exists. ({@link DomainErrorKeys.STRATEGY_ALREADY_ADDED})
+     * @throws ({@link BasaltError}) If a strategy with the same name already exists. ({@link ErrorKeys.STRATEGY_ALREADY_ADDED})
      */
     public addStrategies(strategies: Array<[string, ILoggerStrategy]>): void {
         for (const [key] of strategies)
             if (this._strategies.has(key))
                 throw new BasaltError({
-                    messageKey: DomainErrorKeys.STRATEGY_ALREADY_ADDED,
+                    messageKey: ErrorKeys.STRATEGY_ALREADY_ADDED,
                     detail: {
                         strategyName: key
                     }
@@ -87,12 +86,12 @@ export class BasaltLogger {
      *
      * @param name - The name of the strategy to be removed.
      *
-     * @throws ({@link BasaltError}) If the strategy is not found. ({@link DomainErrorKeys.STRATEGY_NOT_FOUND})
+     * @throws ({@link BasaltError}) If the strategy is not found. ({@link ErrorKeys.STRATEGY_NOT_FOUND})
      */
     public removeStrategy(name: string): void {
         if (!this._strategies.has(name))
             throw new BasaltError({
-                messageKey: DomainErrorKeys.STRATEGY_NOT_FOUND,
+                messageKey: ErrorKeys.STRATEGY_NOT_FOUND,
                 detail: {
                     strategyName: name
                 }
@@ -105,13 +104,13 @@ export class BasaltLogger {
      *
      * @param names - The names of the strategies to be removed.
      *
-     * @throws ({@link BasaltError}) If any of the strategies are not found. ({@link DomainErrorKeys.STRATEGY_NOT_FOUND})
+     * @throws ({@link BasaltError}) If any of the strategies are not found. ({@link ErrorKeys.STRATEGY_NOT_FOUND})
      */
     public removeStrategies(names: string[]): void {
         for (const name of names)
             if (!this._strategies.has(name))
                 throw new BasaltError({
-                    messageKey: DomainErrorKeys.STRATEGY_NOT_FOUND,
+                    messageKey: ErrorKeys.STRATEGY_NOT_FOUND,
                     detail: {
                         strategyName: name
                     }
@@ -208,12 +207,12 @@ export class BasaltLogger {
      * @param object - The object to log.
      * @param strategiesNames - The names of the strategies to output.
      *
-     * @throws ({@link BasaltError}) If no strategies are added. ({@link DomainErrorKeys.NO_STRATEGY_ADDED})
+     * @throws ({@link BasaltError}) If no strategies are added. ({@link ErrorKeys.NO_STRATEGY_ADDED})
      */
     private out(level: LogLevels, object: unknown, strategiesNames: string[] = [...this._strategies.keys()]): void {
         if (this._strategies.size === 0)
             throw new BasaltError({
-                messageKey: DomainErrorKeys.NO_STRATEGY_ADDED
+                messageKey: ErrorKeys.NO_STRATEGY_ADDED
             });
         const log: ILogStreamObject = {
             date: new Date().toISOString(),
