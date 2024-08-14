@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.8.1](https://github.com/Basalt-Lab/basalt-logger/compare/v1.8.0...v1.8.1) (2024-08-14)
+
+
+### Code Refactoring
+
+* merge all errorkeys + clean value... ([e44d51a](https://github.com/Basalt-Lab/basalt-logger/commit/e44d51add99ec7575be4d4541c7175e9f6a3b4d8))
+
+
+### Build System
+
+* downgrade version for the moment ([6cc42b4](https://github.com/Basalt-Lab/basalt-logger/commit/6cc42b4a89859172a90ead1e358f159b2f9cd5fa))
+
 ## [1.8.0](https://github.com/Basalt-Lab/basalt-logger/compare/v1.7.3...v1.8.0) (2024-08-13)
 
 
