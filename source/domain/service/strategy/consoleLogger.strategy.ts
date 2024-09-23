@@ -1,10 +1,9 @@
-import { LogLevels } from '@/Domain/Service/Enum/index.js';
-import type { ILoggerStrategy } from '@/Domain/Service/Interface/index.js';
+import { LogLevels, type LoggerStrategy } from '#/common/types/index.ts';
 
 /**
- * ConsoleLoggerStrategy implements ILoggerStrategy to provide logging functionality to the console. ({@link ILoggerStrategy})
+ * ConsoleLoggerStrategy implements LoggerStrategy to provide logging functionality to the console. ({@link LoggerStrategy})
  */
-export class ConsoleLoggerStrategy implements ILoggerStrategy {
+export class ConsoleLoggerStrategy implements LoggerStrategy {
 
     /**
      * Logs a message to the console with the specified log level.

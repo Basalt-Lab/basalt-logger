@@ -1,8 +1,7 @@
 import { Writable } from 'stream';
 
-import { BasaltError, ErrorKeys } from '@/Common/Error/index.js';
-import { LogLevels } from '@/Domain/Service/Enum/index.js';
-import type { ILoggerStrategy } from '@/Domain/Service/Interface/index.js';
+import { BasaltError, ErrorKeys } from '#/common/error/index.ts';
+import { LogLevels, type LoggerStrategy } from '#/common/types/index.ts';
 
 /**
  * Interface for the log stream object.
@@ -21,9 +20,9 @@ interface ILogStreamObject {
 export class BasaltLogger {
 
     /**
-     * Stores the logging strategies mapped by their names. ({@link ILoggerStrategy})
+     * Stores the logging strategies mapped by their names. ({@link LoggerStrategy})
      */
-    private _strategies: Map<string, ILoggerStrategy> = new Map<string, ILoggerStrategy>();
+    private _strategies: Map<string, LoggerStrategy> = new Map<string, LoggerStrategy>();
 
     /**
      * Stores the log entries that are queued to be logged. ({@link ILogStreamObject})
@@ -47,11 +46,11 @@ export class BasaltLogger {
      * Adds a logging strategy.
      *
      * @param name - The name o                                 f the strategy.
-     * @param strategy - The logging strategy to be added. ({@link ILoggerStrategy})
+     * @param strategy - The logging strategy to be added. ({@link LoggerStrategy})
      *
      * @throws ({@link BasaltError}) If a strategy with the same name already exists. ({@link ErrorKeys.STRATEGY_ALREADY_ADDED})
      */
-    public addStrategy(name: string, strategy: ILoggerStrategy): void {
+    public addStrategy(name: string, strategy: LoggerStrategy): void {
         if (this._strategies.has(name))
             throw new BasaltError({
                 messageKey: ErrorKeys.STRATEGY_ALREADY_ADDED,
@@ -65,11 +64,11 @@ export class BasaltLogger {
     /**
      * Adds multiple logging strategies.
      *
-     * @param strategies - An array of strategies. Each element is a tuple with the name of the strategy and the strategy itself. [name, strategy] ({@link ILoggerStrategy})
+     * @param strategies - An array of strategies. Each element is a tuple with the name of the strategy and the strategy itself. [name, strategy] ({@link LoggerStrategy})
      *
      * @throws ({@link BasaltError}) If a strategy with the same name already exists. ({@link ErrorKeys.STRATEGY_ALREADY_ADDED})
      */
-    public addStrategies(strategies: Array<[string, ILoggerStrategy]>): void {
+    public addStrategies(strategies: [string, LoggerStrategy][]): void {
         for (const [key] of strategies)
             if (this._strategies.has(key))
                 throw new BasaltError({
