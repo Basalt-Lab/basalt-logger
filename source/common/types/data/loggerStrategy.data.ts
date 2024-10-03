@@ -1,6 +1,6 @@
-import type { LogLevels } from '@/Domain/Service/Enum/index.js';
+import type { LogLevels } from '#/common/types/enum/index.ts';
 
-export interface ILoggerStrategy {
+export interface LoggerStrategy {
     /**
      * Logs a message with the strategy's implementation.
      *
