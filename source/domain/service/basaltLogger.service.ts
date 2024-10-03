@@ -42,7 +42,6 @@ export class BasaltLogger {
      */
     private _writing = false;
 
-
     /**
      * Initializes the BasaltLogger.
      */
@@ -201,7 +200,5 @@ export class BasaltLogger {
             this._logStream.once('drain', this.writeLog.bind(this));
         else
             this._writing = false;
-
     }
-
 }
