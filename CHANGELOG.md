@@ -1,5 +1,34 @@
 # Changelog
 
+## [1.9.0](https://github.com/Basalt-Lab/basalt-logger/compare/v1.8.2...v1.9.0) (2024-10-03)
+
+
+### Features
+
+* add color to console logger strategy ([f6042bd](https://github.com/Basalt-Lab/basalt-logger/commit/f6042bdb5b9ae5f0b64c322277383c27c980dfca))
+* change structure and nomenclature ... ([7809ddb](https://github.com/Basalt-Lab/basalt-logger/commit/7809ddb3d636d19f947e28607ef9a21de0a9f930))
+
+
+### Code Refactoring
+
+* code improvement ([b0b7f78](https://github.com/Basalt-Lab/basalt-logger/commit/b0b7f788102034357492ac6251b5de6b28fe47f6))
+
+
+### Build System
+
+* change build system ([7b99b2a](https://github.com/Basalt-Lab/basalt-logger/commit/7b99b2a1d292929db9373d0645051cbb3dab333b))
+* update dependencies ([6e3e362](https://github.com/Basalt-Lab/basalt-logger/commit/6e3e3629e027287b73d1fbb062843dceee88a406))
+
+
+### Tests
+
+* add tests (not finish) ([103fe7a](https://github.com/Basalt-Lab/basalt-logger/commit/103fe7a43e67b90c2829580143a38b048fc7baaa))
+
+
+### Continuous Integration
+
+* refacto to support bun ([fc91ebc](https://github.com/Basalt-Lab/basalt-logger/commit/fc91ebc71564d9c70d7441987158f5c794a50337))
+
 ## [1.8.2](https://github.com/Basalt-Lab/basalt-logger/compare/v1.8.1...v1.8.2) (2024-08-14)
 
 
