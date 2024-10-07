@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.1](https://github.com/Basalt-Lab/basalt-logger/compare/v1.9.0...v1.9.1) (2024-10-07)
+
+
+### Bug Fixes
+
+* correction name (because bun bundler has no keepName like esbuild) ([c8f628a](https://github.com/Basalt-Lab/basalt-logger/commit/c8f628a00b33b45839d6b6d46ccab31573d703dd))
+
 ## [1.9.0](https://github.com/Basalt-Lab/basalt-logger/compare/v1.8.2...v1.9.0) (2024-10-03)
 
 
