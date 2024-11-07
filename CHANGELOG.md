@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.9.2](https://github.com/Basalt-Lab/basalt-logger/compare/v1.9.1...v1.9.2) (2024-11-07)
+
+
+### Build System
+
+* update script package json ([cb5668c](https://github.com/Basalt-Lab/basalt-logger/commit/cb5668cdf5efb06b48ffb4695d6c39821ee00f9e))
+* updates packages ([3bd2408](https://github.com/Basalt-Lab/basalt-logger/commit/3bd2408fa90c6ca1f8d99c54325078861a4cbd77))
+
+
+### Styles
+
+* update eslint ([1eeb8a6](https://github.com/Basalt-Lab/basalt-logger/commit/1eeb8a604579a055cece5c8d70fd21cf6203bd79))
+
 ## [1.9.1](https://github.com/Basalt-Lab/basalt-logger/compare/v1.9.0...v1.9.1) (2024-10-07)
 
 
