@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.3](https://github.com/Basalt-Lab/basalt-logger/compare/v1.9.2...v1.9.3) (2024-11-07)
+
+
+### Build System
+
+* reduce package size ([c96d52d](https://github.com/Basalt-Lab/basalt-logger/commit/c96d52da48574ce215ab04c04f2fc5f9899ab495))
+
 ## [1.9.2](https://github.com/Basalt-Lab/basalt-logger/compare/v1.9.1...v1.9.2) (2024-11-07)
 
 
