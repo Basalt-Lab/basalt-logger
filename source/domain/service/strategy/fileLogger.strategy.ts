@@ -7,7 +7,6 @@ import type { LogLevels, LoggerStrategy } from '#/common/types/index.ts';
  * FileLoggerStrategy implements LoggerStrategy to provide logging functionality to the file system. ({@link LoggerStrategy})
  */
 export class FileLoggerStrategy implements LoggerStrategy {
-
     /**
      * Path to the file to log to.
      */
@@ -30,9 +29,9 @@ export class FileLoggerStrategy implements LoggerStrategy {
      * @param object - The object to log.
      */
     public log(level: LogLevels, date: Date, object: unknown): void {
-        const prefixDate: string = `[${date.toISOString().replace(/T/, ' ').replace(/\..+/, '')}]`;
+        const prefixDate = `[${date.toISOString().replace(/T/, ' ').replace(/\..+/, '')}]`;
         const sanitizedObject: string = typeof object === 'string' ? object : JSON.stringify(object);
-        const message: string = `${prefixDate} ${level} : ${sanitizedObject}`;
+        const message = `${prefixDate} ${level} : ${sanitizedObject}`;
         appendFile(this._path, `${message}\n`, (err): void => {
             if (err) throw err;
         });
