@@ -28,42 +28,42 @@ export class ConsoleLoggerStrategy implements LoggerStrategy {
         const sanitizedObject: string = typeof object === 'string' ? object : JSON.stringify(object);
         let logLevelColor = '';
         switch (level) {
-        case LogLevels.ERROR:
-            logLevelColor = this._colorize ? '\x1b[31m' : '';
-            break;
-        case LogLevels.WARN:
-            logLevelColor = this._colorize ? '\x1b[33m' : '';
-            break;
-        case LogLevels.INFO:
-            logLevelColor = this._colorize ? '\x1b[36m' : '';
-            break;
-        case LogLevels.DEBUG:
-            logLevelColor = this._colorize ? '\x1b[35m' : '';
-            break;
-        default:
-            logLevelColor = this._colorize ? '\x1b[37m' : '';
-            break;
+            case LogLevels.ERROR:
+                logLevelColor = this._colorize ? '\x1b[31m' : '';
+                break;
+            case LogLevels.WARN:
+                logLevelColor = this._colorize ? '\x1b[33m' : '';
+                break;
+            case LogLevels.INFO:
+                logLevelColor = this._colorize ? '\x1b[36m' : '';
+                break;
+            case LogLevels.DEBUG:
+                logLevelColor = this._colorize ? '\x1b[35m' : '';
+                break;
+            default:
+                logLevelColor = this._colorize ? '\x1b[37m' : '';
+                break;
         }
-        const prefixDate: string = `[${dateColor}${date.toISOString().replace(/T/, ' ').replace(/\..+/, '')}${colorReset}]`;
-        const message: string = `${prefixDate} ${logLevelColor}${level}${colorReset} : ${sanitizedObject}`;
+        const prefixDate = `[${dateColor}${date.toISOString().replace(/T/, ' ').replace(/\..+/, '')}${colorReset}]`;
+        const message = `${prefixDate} ${logLevelColor}${level}${colorReset} : ${sanitizedObject}`;
         switch (level) {
-        case LogLevels.ERROR:
-            console.error(message);
-            break;
-        case LogLevels.WARN:
-            console.warn(message);
-            break;
-        case LogLevels.INFO:
-            console.info(message);
-            break;
-        case LogLevels.DEBUG:
-            console.debug(message);
-            break;
-        case LogLevels.LOG:
-            console.log(message);
-            break;
-        default:
-            break;
+            case LogLevels.ERROR:
+                console.error(message);
+                break;
+            case LogLevels.WARN:
+                console.warn(message);
+                break;
+            case LogLevels.INFO:
+                console.info(message);
+                break;
+            case LogLevels.DEBUG:
+                console.debug(message);
+                break;
+            case LogLevels.LOG:
+                console.log(message);
+                break;
+            default:
+                break;
         }
     }
 }
