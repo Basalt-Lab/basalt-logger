@@ -12,5 +12,5 @@ export const ErrorKeys = {
      * - strategyName : The name of the strategy
      */
     STRATEGY_NOT_FOUND: 'error.basalt-logger.strategy_not_found',
-    NO_STRATEGY_ADDED: 'error.basalt-logger.no_strategy_added',
+    NO_STRATEGY_ADDED: 'error.basalt-logger.no_strategy_added'
 };
