@@ -10,7 +10,6 @@ await Bun.build({
     entrypoints: [
         './source/index.ts',
         './source/common/error/index.ts',
-        './source/common/type/index.ts',
         './source/common/type/data/index.ts',
         './source/common/type/enum/index.ts',
         './source/domain/service/index.ts',
