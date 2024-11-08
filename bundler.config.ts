@@ -12,7 +12,7 @@ await Bun.build({
         './source/common/error/index.ts',
         './source/common/type/data/index.ts',
         './source/common/type/enum/index.ts',
-        './source/domain/service/index.ts',
+        './source/domain/service/basaltLogger.ts',
         './source/domain/service/strategyLogger/index.ts'
     ],
     outdir: './build',
