@@ -1,1 +1,1 @@
-export * from './basaltLogger.service.ts';
+export * from './basaltLogger.ts';

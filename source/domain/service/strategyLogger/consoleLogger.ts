@@ -1,5 +1,5 @@
-import type { LoggerStrategy } from '#/common/type/data/loggerStrategy.data.ts';
-import { LogLevels } from '#/common/type/enum/logLevels.enum.ts';
+import type { LoggerStrategy } from '#/common/type/data/loggerStrategy.ts';
+import { LogLevels } from '#/common/type/enum/logLevels.ts';
 
 /**
  * ConsoleLoggerStrategy implements LoggerStrategy to provide logging functionality to the console. ({@link LoggerStrategy})
