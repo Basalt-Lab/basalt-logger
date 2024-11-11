@@ -1,7 +1,9 @@
 import { Transform } from 'stream';
 
-import { BasaltError, ErrorKeys } from '#/common/error/index.ts';
-import { LogLevels, type LoggerStrategy } from '#/common/types/index.ts';
+import { BasaltError } from '#/common/error/basaltError.ts';
+import { ErrorKeys } from '#/common/error/errorKeys.ts';
+import type { LoggerStrategy } from '#/common/type/data/loggerStrategy.ts';
+import { LogLevels } from '#/common/type/enum/logLevels.ts';
 
 /**
  * Interface for the log stream object.

@@ -1,7 +1,7 @@
 import { appendFile } from 'fs';
 
-import type { LogLevels, LoggerStrategy } from '#/common/types/index.ts';
-
+import type { LoggerStrategy } from '#/common/type/data/loggerStrategy.ts';
+import type { LogLevels } from '#/common/type/enum/logLevels.ts';
 
 /**
  * FileLoggerStrategy implements LoggerStrategy to provide logging functionality to the file system. ({@link LoggerStrategy})
