@@ -1,5 +1,31 @@
 # Changelog
 
+## [1.10.0](https://github.com/Basalt-Lab/basalt-logger/compare/v1.9.3...v1.10.0) (2024-11-11)
+
+
+### Features
+
+* Don't use Barrel File in code base only to export ([b97af71](https://github.com/Basalt-Lab/basalt-logger/commit/b97af714b6160ae213d74d9c8d0e5f40ceae06bf))
+
+
+### Bug Fixes
+
+* correction name erroKeys ([2d8869c](https://github.com/Basalt-Lab/basalt-logger/commit/2d8869cf664df9901d2be58b020b8c0d9cc50e98))
+
+
+### Code Refactoring
+
+* rename all files with extension ([8475fc7](https://github.com/Basalt-Lab/basalt-logger/commit/8475fc710ed76e4241b24966a0ea5aff84f42df3))
+* rename file and change index ([67bc341](https://github.com/Basalt-Lab/basalt-logger/commit/67bc3415ad7aafd35a114a5903ac3352aa0acb1d))
+
+
+### Build System
+
+* add exports multiple entry point ([81528f2](https://github.com/Basalt-Lab/basalt-logger/commit/81528f22192415acdf4c5db06df8e425fe71c66e))
+* add splitting ([ddbd203](https://github.com/Basalt-Lab/basalt-logger/commit/ddbd20316871c610163e8b574ccade0691dd5729))
+* change export (simplify) ([1659059](https://github.com/Basalt-Lab/basalt-logger/commit/16590596b9316172d2f06feeceef9d034840c5ad))
+* update package export and update nvmrc and bundler ([926bd99](https://github.com/Basalt-Lab/basalt-logger/commit/926bd99dec930e3e98f01d919b6e16c93f3aa4e2))
+
 ## [1.9.3](https://github.com/Basalt-Lab/basalt-logger/compare/v1.9.2...v1.9.3) (2024-11-07)
 
 
