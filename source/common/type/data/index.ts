@@ -1,1 +1,1 @@
-export type * from './loggerStrategy.ts';
+export type * from './loggerStrategy.data.ts';

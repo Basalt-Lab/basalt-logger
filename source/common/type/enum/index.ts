@@ -1,1 +1,1 @@
-export * from './logLevels.ts';
+export * from './logLevels.enum.ts';

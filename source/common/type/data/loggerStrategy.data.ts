@@ -1,4 +1,4 @@
-import type { LogLevels } from '#/common/type/enum/logLevels.ts';
+import type { LogLevels } from '#/common/type/enum/logLevels.enum.ts';
 
 export interface LoggerStrategy {
     /**

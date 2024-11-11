@@ -26,14 +26,14 @@
       "require": "./build/common/type/enum/index.js"
     },
     "./logger": {
-      "types": "./build/domain/service/basaltLogger.d.js",
-      "import": "./build/domain/service/basaltLogger.js",
-      "require": "./build/domain/service/basaltLogger.js"
+      "types": "./build/domain/service/basaltLogger.service.d.js",
+      "import": "./build/domain/service/basaltLogger.service.js",
+      "require": "./build/domain/service/basaltLogger.service.js"
     },
     "./strategy": {
-      "types": "./build/domain/service/strategyLogger/index.d.js",
-      "import": "./build/domain/service/strategyLogger/index.js",
-      "require": "./build/domain/service/strategyLogger/index.js"
+      "types": "./build/domain/service/strategy/index.d.js",
+      "import": "./build/domain/service/strategy/index.js",
+      "require": "./build/domain/service/strategy/index.js"
     }
   },
   "scripts": {
