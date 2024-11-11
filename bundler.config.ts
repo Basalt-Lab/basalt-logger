@@ -15,6 +15,7 @@ await Bun.build({
         './source/domain/service/basaltLogger.ts',
         './source/domain/service/strategyLogger/index.ts'
     ],
+    splitting: true,
     outdir: './build',
     format: 'esm',
     minify: true,
