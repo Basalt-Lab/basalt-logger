@@ -1,5 +1,35 @@
 # Changelog
 
+## v1.11.0-canary-20241218-cdb8efc
+
+[compare changes](https://github.com/Basalt-Lab/basalt-logger/compare/v1.10.0...v1.11.0-canary-20241218-cdb8efc)
+
+### 🚀 Enhancements
+
+- **🚀:** Integrate translation ([f78fb16](https://github.com/Basalt-Lab/basalt-logger/commit/f78fb16))
+
+### 🧹 Refactors
+
+- **🧹:** Refacto Error System ([573145d](https://github.com/Basalt-Lab/basalt-logger/commit/573145d))
+
+### 📦 Build
+
+- **📦:** Update npm ignore ([dcf507a](https://github.com/Basalt-Lab/basalt-logger/commit/dcf507a))
+- **📦:** Bump node version to 23.4 and update dependencies ([073c84f](https://github.com/Basalt-Lab/basalt-logger/commit/073c84f))
+
+### 🧪 Tests
+
+- **🧪:** Refactor and improvements tests ([f80fd44](https://github.com/Basalt-Lab/basalt-logger/commit/f80fd44))
+
+### 🤖 CI
+
+- **🤖:** Add workflow Pull Request Checker ([299741f](https://github.com/Basalt-Lab/basalt-logger/commit/299741f))
+- **🤖:** Add workflow merge dev and main ([4da7f72](https://github.com/Basalt-Lab/basalt-logger/commit/4da7f72))
+
+### ❤️ Contributors
+
+- Ruby <necrelox@proton.me>
+
 ## [1.10.0](https://github.com/Basalt-Lab/basalt-logger/compare/v1.9.3...v1.10.0) (2024-11-11)
 
 
