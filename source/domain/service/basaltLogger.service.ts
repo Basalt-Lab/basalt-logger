@@ -45,7 +45,8 @@ export class BasaltLogger {
     private _writing = false;
 
     /**
-     * Initializes the BasaltLogger.
+     * Initializes the BasaltLogger, creates the log stream ({@link Transform}).
+     * The log stream processes the log entries and executes the logging strategies.
      */
     public constructor() {
         this._logStream = new Transform({
@@ -106,6 +107,8 @@ export class BasaltLogger {
      *
      * @param object - The object to log.
      * @param strategiesNames - The names of the strategies to use. (default: all strategies)
+     *
+     * @throws ({@link BasaltError}) - If no strategy is added. ({@link GLOBAL_ERRORS.NO_STRATEGY_ADDED})
      */
     public error(object: unknown, strategiesNames?: string[]): void {
         this.out(LogLevels.ERROR, object, strategiesNames);
@@ -116,6 +119,8 @@ export class BasaltLogger {
      *
      * @param object - The object to log.
      * @param strategiesNames - The names of the strategies to use. (default: all strategies)
+     *
+     * @throws ({@link BasaltError}) - If no strategy is added. ({@link GLOBAL_ERRORS.NO_STRATEGY_ADDED})
      */
     public warn(object: unknown, strategiesNames?: string[]): void {
         this.out(LogLevels.WARN, object, strategiesNames);
@@ -126,6 +131,8 @@ export class BasaltLogger {
      *
      * @param object - The object to log.
      * @param strategiesNames - The names of the strategies to use. (default: all strategies)
+     *
+     * @throws ({@link BasaltError}) - If no strategy is added. ({@link GLOBAL_ERRORS.NO_STRATEGY_ADDED})
      */
     public info(object: unknown, strategiesNames?: string[]): void {
         this.out(LogLevels.INFO, object, strategiesNames);
