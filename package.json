@@ -1,6 +1,6 @@
 {
   "name": "@basalt-lab/basalt-logger",
-  "version": "1.10.0",
+  "version": "1.11.0-canary-20241218-cdb8efc",
   "description": "Logger module for Basalt Framework",
   "type": "module",
   "types": "./build/index.d.ts",
