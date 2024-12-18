@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.11.1-canary-20241218-5624400
+
+[compare changes](https://github.com/Basalt-Lab/basalt-logger/compare/v1.11.0...v1.11.1-canary-20241218-5624400)
+
+### 🤖 CI
+
+- **🤖:** Import GPG and autosign commit ([4c64aa5](https://github.com/Basalt-Lab/basalt-logger/commit/4c64aa5))
+
+### ❤️ Contributors
+
+- Ruby <necrelox@proton.me>
+
 ## v1.11.0
 
 [compare changes](https://github.com/Basalt-Lab/basalt-logger/compare/v1.11.0-canary-20241218-cdb8efc...v1.11.0)
