@@ -34,6 +34,11 @@
       "types": "./build/domain/service/strategy/index.d.js",
       "import": "./build/domain/service/strategy/index.js",
       "require": "./build/domain/service/strategy/index.js"
+    },
+    "./translation": {
+      "types": "./build/common/i18n/index.d.js",
+      "import": "./build/common/i18n/index.js",
+      "require": "./build/common/i18n/index.js"
     }
   },
   "scripts": {
@@ -71,5 +76,57 @@
     "tsc-alias": "^1.8.10",
     "typedoc": "^0.27.5",
     "typescript": "^5.7.2"
+  },
+  "changelog": {
+    "types": {
+      "feat": {
+        "title": "🚀 Enhancements",
+        "semver": "minor"
+      },
+      "perf": {
+        "title": "⚡ Performance",
+        "semver": "patch"
+      },
+      "fix": {
+        "title": "🔧 Fixes",
+        "semver": "patch"
+      },
+      "refactor": {
+        "title": "🧹 Refactors",
+        "semver": "patch"
+      },
+      "docs": {
+        "title": "📖 Documentation",
+        "semver": "patch"
+      },
+      "build": {
+        "title": "📦 Build",
+        "semver": "patch"
+      },
+      "types": {
+        "title": "🌊 Types",
+        "semver": "patch"
+      },
+      "chore": {
+        "title": "🦉 Chore"
+      },
+      "examples": {
+        "title": "🏀 Examples"
+      },
+      "test": {
+        "title": "🧪 Tests"
+      },
+      "style": {
+        "title": "🎨 Styles"
+      },
+      "ci": {
+        "title": "🤖 CI"
+      }
+    },
+    "templates": {
+      "commitMessage": "chore(🦉): v{{newVersion}}",
+      "tagMessage": "v{{newVersion}}",
+      "tagBody": "v{{newVersion}}"
+    }
   }
 }

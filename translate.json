@@ -1,0 +1,46 @@
+{
+  "dealerI18n:lang": [
+    "fr",
+    "en",
+    "es",
+    "de",
+    "it",
+    "ja",
+    "ko",
+    "ar"
+  ],
+  "error": {
+    "basalt-logger": {
+      "no_strategy_added": {
+        "lang:ar": "لم يتم إضافة أي استراتيجية",
+        "lang:de": "Keine Strategie hinzugefügt",
+        "lang:en": "No strategy added",
+        "lang:es": "No se ha añadido ninguna estrategia",
+        "lang:fr": "Aucune stratégie ajoutée",
+        "lang:it": "Nessuna strategia aggiunta",
+        "lang:ja": "戦略が追加されていません",
+        "lang:ko": "전략이 추가되지 않았습니다"
+      },
+      "strategy_already_added": {
+        "lang:ar": "الاستراتيجية مضافة بالفعل",
+        "lang:de": "Strategie bereits hinzugefügt",
+        "lang:en": "Strategy already added",
+        "lang:es": "Estrategia ya añadida",
+        "lang:fr": "La stratégie a déjà été ajoutée",
+        "lang:it": "Strategia già aggiunta",
+        "lang:ja": "戦略はすでに追加されています",
+        "lang:ko": "전략이 이미 추가되었습니다"
+      },
+      "strategy_not_found": {
+        "lang:ar": "الاستراتيجية غير موجودة",
+        "lang:de": "Strategie nicht gefunden",
+        "lang:en": "Strategy not found",
+        "lang:es": "Estrategia no encontrada",
+        "lang:fr": "Stratégie non trouvée",
+        "lang:it": "Strategia non trovata",
+        "lang:ja": "戦略が見つかりません",
+        "lang:ko": "전략을 찾을 수 없습니다"
+      }
+    }
+  }
+}
