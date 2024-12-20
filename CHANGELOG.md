@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.11.2-canary-20241220-5181144
+
+[compare changes](https://github.com/Basalt-Lab/basalt-logger/compare/v1.11.1...v1.11.2-canary-20241220-5181144)
+
+### 🤖 CI
+
+- **🤖:** Add rebase step for develop branch in merge workflow ([f4f4afe](https://github.com/Basalt-Lab/basalt-logger/commit/f4f4afe))
+
+### ❤️ Contributors
+
+- Ruby <necrelox@proton.me>
+
 ## v1.11.1
 
 [compare changes](https://github.com/Basalt-Lab/basalt-logger/compare/v1.11.1-canary-20241218-5624400...v1.11.1)
