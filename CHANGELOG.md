@@ -1,5 +1,23 @@
 # Changelog
 
+## v1.11.3
+
+[compare changes](https://github.com/Basalt-Lab/basalt-logger/compare/v1.11.2-canary-20241220-5181144...v1.11.3)
+
+### 🧹 Refactors
+
+- **🧹:** Architecture + code + tests ([1c020a4](https://github.com/Basalt-Lab/basalt-logger/commit/1c020a4))
+
+### 🦉 Chore
+
+- **🦉:** V1.11.2 ([4907d1a](https://github.com/Basalt-Lab/basalt-logger/commit/4907d1a))
+- **🦉:** V1.11.3-canary-20250107-804476b ([95a6551](https://github.com/Basalt-Lab/basalt-logger/commit/95a6551))
+
+### ❤️ Contributors
+
+- Github-actions <necrelox@proton.me>
+- Ruby <necrelox@proton.me>
+
 ## v1.11.3-canary-20250107-804476b
 
 [compare changes](https://github.com/Basalt-Lab/basalt-logger/compare/v1.11.2-canary-20241220-5181144...v1.11.3-canary-20250107-804476b)
