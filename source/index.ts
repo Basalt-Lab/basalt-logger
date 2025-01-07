@@ -6,7 +6,7 @@ export * from './core/strategy/fileLogger';
 
 // Exports of error classes
 export * from './error/basaltError';
-export * from './error/key/global.error';
+export * from './error/key/globalKeyError';
 
 // Exports of i18n translation files
 import arLocale from './i18n/ar.json' with { type: 'json' };

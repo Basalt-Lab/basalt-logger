@@ -1,7 +1,7 @@
 import { Transform } from 'stream';
 
 import { BasaltError } from '#/error/basaltError';
-import { GLOBAL_KEY_ERROR } from '#/error/key/global.error';
+import { GLOBAL_KEY_ERROR } from '#/error/key/globalKeyError';
 import type { LoggerStrategy } from '#/types/data/loggerStrategy';
 import type { LogLevels } from '#/types/data/logLevels';
 
