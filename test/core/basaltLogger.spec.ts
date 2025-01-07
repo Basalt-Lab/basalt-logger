@@ -1,9 +1,9 @@
-import { describe, expect, mock, test } from 'bun:test';
+import { describe, expect, test } from 'bun:test';
 import { Transform } from 'stream';
 
-import { LoggerStrategy } from '../../../source/common/type/data/loggerStrategy.data';
-import { LogLevels } from '../../../source/common/type/enum/logLevels.enum';
-import { BasaltLogger } from '../../../source/domain/service/basaltLogger.service';
+import { BasaltLogger } from '#/core/basaltLogger';
+import type { LoggerStrategy } from '#/types/data/loggerStrategy';
+import type { LogLevels } from '#/types/data/logLevels';
 
 describe('BasaltLogger', () => {
     describe('constructor', () => {
@@ -28,7 +28,8 @@ describe('BasaltLogger', () => {
             const basaltLogger: BasaltLogger = new BasaltLogger();
             const strategyName = 'test';
             const strategy: LoggerStrategy = {
-                log: mock(() => {})
+                // eslint-disable-next-line no-empty-function, @typescript-eslint/no-empty-function
+                log: () => {}
             };
             basaltLogger.addStrategy(strategyName, strategy);
             expect(basaltLogger['_strategies'].get(strategyName)).toBe(strategy);
@@ -38,7 +39,8 @@ describe('BasaltLogger', () => {
             const basaltLogger: BasaltLogger = new BasaltLogger();
             const strategyName = 'test';
             const strategy: LoggerStrategy = {
-                log: mock(() => {})
+                // eslint-disable-next-line no-empty-function, @typescript-eslint/no-empty-function
+                log: () => {}
             };
             basaltLogger.addStrategy(strategyName, strategy);
             expect(() => basaltLogger.addStrategy(strategyName, strategy)).toThrow('error.basalt-logger.strategy_already_added');
@@ -50,7 +52,8 @@ describe('BasaltLogger', () => {
             const basaltLogger: BasaltLogger = new BasaltLogger();
             const strategyName = 'test';
             const strategy: LoggerStrategy = {
-                log: mock(() => {})
+                // eslint-disable-next-line no-empty-function, @typescript-eslint/no-empty-function
+                log: () => {}
             };
             basaltLogger.addStrategy(strategyName, strategy);
             basaltLogger.removeStrategy(strategyName);
@@ -69,7 +72,8 @@ describe('BasaltLogger', () => {
             const basaltLogger: BasaltLogger = new BasaltLogger();
             const strategyName = 'test';
             const strategy: LoggerStrategy = {
-                log: mock(() => {})
+                // eslint-disable-next-line no-empty-function, @typescript-eslint/no-empty-function
+                log: () => {}
             };
             basaltLogger.addStrategy(strategyName, strategy);
             basaltLogger.clearStrategies();
@@ -82,7 +86,7 @@ describe('BasaltLogger', () => {
             const basaltLogger: BasaltLogger = new BasaltLogger();
             const strategy: LoggerStrategy = {
                 log: (level: LogLevels, _: Date, object: unknown) => {
-                    expect(level).toBe(LogLevels.ERROR);
+                    expect(level).toBe('ERROR');
                     expect(object).toBeInstanceOf(Error);
                 }
             };
@@ -107,7 +111,7 @@ describe('BasaltLogger', () => {
             const basaltLogger: BasaltLogger = new BasaltLogger();
             const strategy: LoggerStrategy = {
                 log: (level: LogLevels, _: Date, object: unknown) => {
-                    expect(level).toBe(LogLevels.WARN);
+                    expect(level).toBe('WARN');
                     expect(object).toBe('test');
                 }
             };
@@ -130,7 +134,7 @@ describe('BasaltLogger', () => {
             const basaltLogger: BasaltLogger = new BasaltLogger();
             const strategy: LoggerStrategy = {
                 log: (level: LogLevels, _: Date, object: unknown) => {
-                    expect(level).toBe(LogLevels.DEBUG);
+                    expect(level).toBe('DEBUG');
                     expect(object).toBe('test');
                 }
             };
@@ -153,7 +157,7 @@ describe('BasaltLogger', () => {
             const basaltLogger: BasaltLogger = new BasaltLogger();
             const strategy: LoggerStrategy = {
                 log: (level: LogLevels, _: Date, object: unknown) => {
-                    expect(level).toBe(LogLevels.LOG);
+                    expect(level).toBe('LOG');
                     expect(object).toBe('test');
                 }
             };
