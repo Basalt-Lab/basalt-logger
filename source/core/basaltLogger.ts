@@ -64,7 +64,7 @@ export class BasaltLogger {
      * @param name - The name of the strategy.
      * @param strategy - The strategy to add. ({@link LoggerStrategy})
      *
-     * @throws ({@link BasaltError}) - If the strategy is already added. ({@link GLOBAL_KEY_ERROR}.STRATEGY_ALREADY_ADDED)
+     * @throws ({@link BasaltError}) - If the strategy is already added. ({@link GLOBAL_KEY_ERROR.STRATEGY_ALREADY_ADDED})
      */
     public addStrategy(name: string, strategy: LoggerStrategy): void {
         if (this._strategies.has(name))
@@ -82,7 +82,7 @@ export class BasaltLogger {
      *
      * @param name - The name of the strategy.
      *
-     * @throws ({@link BasaltError}) - If the strategy is not found. ({@link GLOBAL_KEY_ERROR}.STRATEGY_NOT_FOUND)
+     * @throws ({@link BasaltError}) - If the strategy is not found. ({@link GLOBAL_KEY_ERROR.STRATEGY_NOT_FOUND})
      */
     public removeStrategy(name: string): void {
         if (!this._strategies.has(name))
@@ -108,7 +108,7 @@ export class BasaltLogger {
      * @param object - The object to log.
      * @param strategiesNames - The names of the strategies to use. (default: all strategies)
      *
-     * @throws ({@link BasaltError}) - If no strategy is added. ({@link GLOBAL_KEY_ERROR}.NO_STRATEGY_ADDED)
+     * @throws ({@link BasaltError}) - If no strategy is added. ({@link GLOBAL_KEY_ERROR.NO_STRATEGY_ADDED})
      */
     public error(object: unknown, strategiesNames?: string[]): void {
         this.out('ERROR', object, strategiesNames);
@@ -120,7 +120,7 @@ export class BasaltLogger {
      * @param object - The object to log.
      * @param strategiesNames - The names of the strategies to use. (default: all strategies)
      *
-     * @throws ({@link BasaltError}) - If no strategy is added. ({@link GLOBAL_KEY_ERROR}.NO_STRATEGY_ADDED)
+     * @throws ({@link BasaltError}) - If no strategy is added. ({@link GLOBAL_KEY_ERROR.NO_STRATEGY_ADDED})
      */
     public warn(object: unknown, strategiesNames?: string[]): void {
         this.out('WARN', object, strategiesNames);
@@ -132,7 +132,7 @@ export class BasaltLogger {
      * @param object - The object to log.
      * @param strategiesNames - The names of the strategies to use. (default: all strategies)
      *
-     * @throws ({@link BasaltError}) - If no strategy is added. ({@link GLOBAL_KEY_ERROR}.NO_STRATEGY_ADDED)
+     * @throws ({@link BasaltError}) - If no strategy is added. ({@link GLOBAL_KEY_ERROR.NO_STRATEGY_ADDED})
      */
     public info(object: unknown, strategiesNames?: string[]): void {
         this.out('INFO', object, strategiesNames);
@@ -178,7 +178,7 @@ export class BasaltLogger {
      * @param object - The object to log.
      * @param strategiesNames - The names of the strategies to use. (default: all strategies)
      *
-     * @throws ({@link BasaltError}) - If no strategy is added. ({@link GLOBAL_KEY_ERROR}.NO_STRATEGY_ADDED)
+     * @throws ({@link BasaltError}) - If no strategy is added. ({@link GLOBAL_KEY_ERROR.NO_STRATEGY_ADDED})
      */
     private out(level: LogLevels, object: unknown, strategiesNames: string[] = [...this._strategies.keys()]): void {
         if (this._strategies.size === 0)
