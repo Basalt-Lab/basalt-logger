@@ -1,7 +1,7 @@
 /**
  * Global error key is a list of errors in the global context.
  */
-export const GLOBAL_KEY_ERROR: Record<string, [string, number]> = {
+export const GLOBAL_KEY_ERROR = {
     /**
      * Interpolation :
      * - strategyName : The name of the strategy.
