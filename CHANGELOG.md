@@ -1,5 +1,22 @@
 # Changelog
 
+## v1.11.4-canary-20250123-37d2c3b
+
+[compare changes](https://github.com/Basalt-Lab/basalt-logger/compare/v1.11.3...v1.11.4-canary-20250123-37d2c3b)
+
+### 🧹 Refactors
+
+- **🧹:** Simplify error constants, tsdoc, basalt error ([ee45db1](https://github.com/Basalt-Lab/basalt-logger/commit/ee45db1))
+
+### 📦 Build
+
+- **📦:** Update dependencies and refine .npmignore ([9aa4422](https://github.com/Basalt-Lab/basalt-logger/commit/9aa4422))
+- **📦:** Change build target to bun ([1fb8a81](https://github.com/Basalt-Lab/basalt-logger/commit/1fb8a81))
+
+### ❤️ Contributors
+
+- Ruby <necrelox@proton.me>
+
 ## v1.11.3
 
 [compare changes](https://github.com/Basalt-Lab/basalt-logger/compare/v1.11.2-canary-20241220-5181144...v1.11.3)
