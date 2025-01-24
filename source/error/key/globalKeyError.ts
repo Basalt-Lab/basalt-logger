@@ -12,5 +12,6 @@ export const GLOBAL_KEY_ERROR = {
      * - strategyName : The name of the strategy
      */
     STRATEGY_NOT_FOUND: ['error.basalt-logger.strategy_not_found', 500],
-    NO_STRATEGY_ADDED: ['error.basalt-logger.no_strategy_added', 500]
+    NO_STRATEGY_ADDED: ['error.basalt-logger.no_strategy_added', 500],
+    LOGGER_STRATEGY_ERROR: ['error.basalt-logger.strategy_error', 500]
 } as const;
