@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.12.0-canary-20250124-74e684f
+
+[compare changes](https://github.com/Basalt-Lab/basalt-logger/compare/v1.12.0-canary-20250124-7745cdf...v1.12.0-canary-20250124-74e684f)
+
+### 🧹 Refactors
+
+- **🧹:** Rename error code to statusCode for clarity ([d3b3437](https://github.com/Basalt-Lab/basalt-logger/commit/d3b3437))
+
+### ❤️ Contributors
+
+- Ruby <necrelox@proton.me>
+
 ## v1.12.0-canary-20250124-7745cdf
 
 [compare changes](https://github.com/Basalt-Lab/basalt-logger/compare/v1.12.0-canary-20250124-1bd6eac...v1.12.0-canary-20250124-7745cdf)
