@@ -8,5 +8,5 @@ export interface LoggerStrategy {
      * @param date - The date at which the message was logged.
      * @param object - The object to log.
      */
-    log(level: LogLevels, date: Date, object: unknown): void;
+    log(level: LogLevels, date: Date, object: unknown): Promise<void> | void;
 }
