@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.12.0-canary-20250124-1bd6eac
+
+[compare changes](https://github.com/Basalt-Lab/basalt-logger/compare/v1.12.0-canary-20250124-1c3d3bf...v1.12.0-canary-20250124-1bd6eac)
+
+### 📖 Documentation
+
+- **📖:** Update README & package description ([8f7d7f5](https://github.com/Basalt-Lab/basalt-logger/commit/8f7d7f5))
+
+### ❤️ Contributors
+
+- Ruby <necrelox@proton.me>
+
 ## v1.12.0-canary-20250124-1c3d3bf
 
 [compare changes](https://github.com/Basalt-Lab/basalt-logger/compare/v1.12.0-canary-20250124-53f2a2f...v1.12.0-canary-20250124-1c3d3bf)

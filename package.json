@@ -1,6 +1,6 @@
 {
   "name": "@basalt-lab/basalt-logger",
-  "version": "1.12.0-canary-20250124-1c3d3bf",
+  "version": "1.12.0-canary-20250124-1bd6eac",
   "description": "A non-blocking logger with logging strategies",
   "type": "module",
   "types": "./build/index.d.ts",
