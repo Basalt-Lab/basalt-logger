@@ -1,4 +1,4 @@
-import { appendFile } from 'fs';
+import { appendFile } from 'fs/promises';
 
 import type { LoggerStrategy } from '#/types/data/loggerStrategy';
 import type { LogLevels } from '#/types/data/logLevels';
@@ -28,12 +28,10 @@ export class FileLoggerStrategy implements LoggerStrategy {
      * @param date - The date at which the message was logged.
      * @param object - The object to log.
      */
-    public log(level: LogLevels, date: Date, object: unknown): void {
+    public async log(level: LogLevels, date: Date, object: unknown): Promise<void> {
         const prefixDate = `[${date.toISOString().replace(/T/, ' ').replace(/\..+/, '')}]`;
         const sanitizedObject: string = typeof object === 'string' ? object : JSON.stringify(object);
         const message = `${prefixDate} ${level} : ${sanitizedObject}`;
-        appendFile(this._path, `${message}\n`, (err): void => {
-            if (err) throw err;
-        });
+        await appendFile(this._path, `${message}\n`);
     }
 }
