@@ -1,5 +1,22 @@
 # Changelog
 
+## v1.12.0-canary-20250124-53f2a2f
+
+[compare changes](https://github.com/Basalt-Lab/basalt-logger/compare/v1.11.4-canary-20250123-37d2c3b...v1.12.0-canary-20250124-53f2a2f)
+
+### 🚀 Enhancements
+
+- **🚀:** Update logger strategy to support async logging ([2849190](https://github.com/Basalt-Lab/basalt-logger/commit/2849190))
+- **🚀:** Add new error const ([f7d49e4](https://github.com/Basalt-Lab/basalt-logger/commit/f7d49e4))
+
+### 🧪 Tests
+
+- **🧪:** Enhance tests with error handling and strategy registration ([9b8f3e0](https://github.com/Basalt-Lab/basalt-logger/commit/9b8f3e0))
+
+### ❤️ Contributors
+
+- Ruby <necrelox@proton.me>
+
 ## v1.11.4-canary-20250123-37d2c3b
 
 [compare changes](https://github.com/Basalt-Lab/basalt-logger/compare/v1.11.3...v1.11.4-canary-20250123-37d2c3b)
