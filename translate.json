@@ -1,13 +1,13 @@
 {
   "dealerI18n:lang": [
-    "fr",
+    "ar",
+    "de",
     "en",
     "es",
-    "de",
+    "fr",
     "it",
     "ja",
-    "ko",
-    "ar"
+    "ko"
   ],
   "error": {
     "basalt-logger": {
@@ -30,6 +30,16 @@
         "lang:it": "Strategia già aggiunta",
         "lang:ja": "戦略はすでに追加されています",
         "lang:ko": "전략이 이미 추가되었습니다"
+      },
+      "strategy_error": {
+        "lang:ar": "خطأ في الاستراتيجية",
+        "lang:de": "Strategiefehler",
+        "lang:en": "Strategy error",
+        "lang:es": "Error de estrategia",
+        "lang:fr": "Erreur de stratégie",
+        "lang:it": "Errore di strategia",
+        "lang:ja": "戦略エラー",
+        "lang:ko": "전략 오류"
       },
       "strategy_not_found": {
         "lang:ar": "الاستراتيجية غير موجودة",
