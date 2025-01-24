@@ -33,6 +33,10 @@ await Bun.build({
     outdir: './build',
     splitting: true,
     format: 'esm',
-    minify: true,
+    minify: {
+        identifiers: false,
+        syntax: true,
+        whitespace: true
+    },
     sourcemap: 'none'
 });
