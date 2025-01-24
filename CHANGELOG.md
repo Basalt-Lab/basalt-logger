@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.12.0-canary-20250124-1c3d3bf
+
+[compare changes](https://github.com/Basalt-Lab/basalt-logger/compare/v1.12.0-canary-20250124-53f2a2f...v1.12.0-canary-20250124-1c3d3bf)
+
+### 🚀 Enhancements
+
+- **🚀:** Add 'strategy_error' message to multiple language files ([e1956fa](https://github.com/Basalt-Lab/basalt-logger/commit/e1956fa))
+
+### ❤️ Contributors
+
+- Ruby <necrelox@proton.me>
+
 ## v1.12.0-canary-20250124-53f2a2f
 
 [compare changes](https://github.com/Basalt-Lab/basalt-logger/compare/v1.11.4-canary-20250123-37d2c3b...v1.12.0-canary-20250124-53f2a2f)
