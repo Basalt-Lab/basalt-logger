@@ -1,5 +1,3 @@
-import dts from 'bun-plugin-dts';
-
 import pkg from './package.json';
 
 const dependencies = 'dependencies' in pkg ? Object.keys(pkg.dependencies ?? {}) : [];
@@ -22,13 +20,6 @@ await Bun.build({
         './source/types/index.ts',
 
         './source/index.ts'
-    ],
-    plugins: [
-        dts({
-            output: {
-                noBanner: true
-            }
-        })
     ],
     outdir: './build',
     splitting: true,
