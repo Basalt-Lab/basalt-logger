@@ -33,4 +33,5 @@ test/
 # === Core project files ===
 README.md
 tsconfig.json
+tsconfig.dts.json
 translate.json
