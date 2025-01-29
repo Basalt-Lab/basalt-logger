@@ -9,8 +9,8 @@
     "ja",
     "ko"
   ],
-  "error": {
-    "basalt-logger": {
+  "basalt-logger": {
+    "error": {
       "no_strategy_added": {
         "lang:ar": "لم يتم إضافة أي استراتيجية",
         "lang:de": "Keine Strategie hinzugefügt",
