@@ -91,7 +91,7 @@ describe('BasaltLogger', () => {
                 log: () => {}
             };
             basaltLogger.registerStrategy(strategyName, strategy);
-            expect(() => basaltLogger.registerStrategy(strategyName, strategy)).toThrow('error.basalt-logger.strategy_already_added');
+            expect(() => basaltLogger.registerStrategy(strategyName, strategy)).toThrow('basalt-logger.error.strategy_already_added');
         });
     });
 
@@ -110,7 +110,7 @@ describe('BasaltLogger', () => {
         test('should throw an error if the strategy is not found', () => {
             const basaltLogger: BasaltLogger = new BasaltLogger();
             const strategyName = 'test';
-            expect(() => basaltLogger.unregisterStrategy(strategyName)).toThrow('error.basalt-logger.strategy_not_found');
+            expect(() => basaltLogger.unregisterStrategy(strategyName)).toThrow('basalt-logger.error.strategy_not_found');
         });
     });
 
@@ -142,7 +142,7 @@ describe('BasaltLogger', () => {
                 }]
             ];
             basaltLogger.registerStrategies(strategies);
-            expect(() => basaltLogger.registerStrategies(strategies)).toThrow('error.basalt-logger.strategy_already_added');
+            expect(() => basaltLogger.registerStrategies(strategies)).toThrow('basalt-logger.error.strategy_already_added');
         });
     });
 
@@ -173,7 +173,7 @@ describe('BasaltLogger', () => {
                 }]
             ];
             basaltLogger.registerStrategies(strategies);
-            expect(() => basaltLogger.unregisterStrategies(['test1', 'test3'])).toThrow('error.basalt-logger.strategy_not_found');
+            expect(() => basaltLogger.unregisterStrategies(['test1', 'test3'])).toThrow('basalt-logger.error.strategy_not_found');
         });
     });
 
@@ -211,7 +211,7 @@ describe('BasaltLogger', () => {
         test('should be thrown if no strategy is added', () => {
             const basaltLogger: BasaltLogger = new BasaltLogger();
             const error = new Error('test');
-            expect(() => basaltLogger.error(error)).toThrow('error.basalt-logger.no_strategy_added');
+            expect(() => basaltLogger.error(error)).toThrow('basalt-logger.error.no_strategy_added');
         });
     });
 
@@ -234,7 +234,7 @@ describe('BasaltLogger', () => {
 
         test('should be thrown if no strategy is added', () => {
             const basaltLogger: BasaltLogger = new BasaltLogger();
-            expect(() => basaltLogger.warn('test')).toThrow('error.basalt-logger.no_strategy_added');
+            expect(() => basaltLogger.warn('test')).toThrow('basalt-logger.error.no_strategy_added');
         });
     });
 
@@ -257,7 +257,7 @@ describe('BasaltLogger', () => {
 
         test('should be thrown if no strategy is added', () => {
             const basaltLogger: BasaltLogger = new BasaltLogger();
-            expect(() => basaltLogger.debug('test')).toThrow('error.basalt-logger.no_strategy_added');
+            expect(() => basaltLogger.debug('test')).toThrow('basalt-logger.error.no_strategy_added');
         });
     });
 
@@ -280,7 +280,7 @@ describe('BasaltLogger', () => {
 
         test('should be thrown if no strategy is added', () => {
             const basaltLogger: BasaltLogger = new BasaltLogger();
-            expect(() => basaltLogger.log('test')).toThrow('error.basalt-logger.no_strategy_added');
+            expect(() => basaltLogger.log('test')).toThrow('basalt-logger.error.no_strategy_added');
         });
     });
 });

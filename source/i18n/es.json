@@ -1,6 +1,6 @@
 {
-  "error": {
-    "basalt-logger": {
+  "basalt-logger": {
+    "error": {
       "no_strategy_added": "No se ha añadido ninguna estrategia",
       "strategy_already_added": "Estrategia ya añadida",
       "strategy_error": "Error de estrategia",
