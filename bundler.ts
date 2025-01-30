@@ -15,8 +15,6 @@ await Bun.build({
         './source/error/index.ts',
         './source/error/key/index.ts',
 
-        './source/i18n/index.ts',
-
         './source/types/index.ts',
 
         './source/index.ts'

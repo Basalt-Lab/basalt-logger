@@ -1,7 +1,7 @@
 import { EventEmitter, once, Transform } from 'stream';
 
 import { BasaltError } from '#/error/basaltError';
-import { GLOBAL_KEY_ERROR } from '#/error/key/globalKeyError';
+import { LOGGER_KEY_ERROR } from '#/error/key/loggerKeyError';
 import type { LoggerStrategy } from '#/types/data/loggerStrategy';
 import type { LogLevels } from '#/types/data/logLevels';
 
@@ -114,7 +114,8 @@ export class BasaltLogger extends EventEmitter {
     public registerStrategy(name: string, strategy: LoggerStrategy): void {
         if (this._strategies.has(name))
             throw new BasaltError({
-                key: GLOBAL_KEY_ERROR.STRATEGY_ALREADY_ADDED,
+                message: `The strategy "${name}" is already added.`,
+                key: LOGGER_KEY_ERROR.STRATEGY_ALREADY_ADDED,
                 cause: {
                     strategyName: name
                 }
@@ -132,7 +133,8 @@ export class BasaltLogger extends EventEmitter {
     public unregisterStrategy(name: string): void {
         if (!this._strategies.has(name))
             throw new BasaltError({
-                key: GLOBAL_KEY_ERROR.STRATEGY_NOT_FOUND,
+                message: `The strategy "${name}" is not found.`,
+                key: LOGGER_KEY_ERROR.STRATEGY_NOT_FOUND,
                 cause: {
                     strategyName: name
                 }
@@ -241,7 +243,8 @@ export class BasaltLogger extends EventEmitter {
                 await this._strategies.get(name)?.log(level, date, object);
             } catch (error) {
                 throw new BasaltError({
-                    key: GLOBAL_KEY_ERROR.LOGGER_STRATEGY_ERROR,
+                    message: `An error occurred while executing the strategy "${name}".`,
+                    key: LOGGER_KEY_ERROR.LOGGER_STRATEGY_ERROR,
                     cause: {
                         strategyName: name,
                         object,
@@ -263,7 +266,10 @@ export class BasaltLogger extends EventEmitter {
      */
     private _out<T>(level: LogLevels, object: T, strategiesNames: string[] = [...this._strategies.keys()]): void {
         if (this._strategies.size === 0)
-            throw new BasaltError({ key: GLOBAL_KEY_ERROR.NO_STRATEGY_ADDED });
+            throw new BasaltError({
+                message: 'No strategy is added.',
+                key: LOGGER_KEY_ERROR.NO_STRATEGY_ADDED
+            });
 
         if (this._pendingLogs.length >= this._maxPendingLogs)
             return;
