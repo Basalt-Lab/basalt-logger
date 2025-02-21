@@ -1,9 +1,0 @@
-{
-  "error": {
-    "basalt-logger": {
-      "no_strategy_added": "戦略が追加されていません",
-      "strategy_already_added": "戦略はすでに追加されています",
-      "strategy_not_found": "戦略が見つかりません"
-    }
-  }
-}

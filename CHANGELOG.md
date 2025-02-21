@@ -1,5 +1,128 @@
 # Changelog
 
+## v1.12.0-canary-20250130-9f3764c
+
+[compare changes](https://github.com/Basalt-Lab/basalt-logger/compare/v1.12.0-canary-20250129-e2fed1f...v1.12.0-canary-20250130-9f3764c)
+
+### 🧹 Refactors
+
+- **🧹:** Refactor error system and remove translation ([98fbe83](https://github.com/Basalt-Lab/basalt-logger/commit/98fbe83))
+
+### ❤️ Contributors
+
+- Ruby <necrelox@proton.me>
+
+## v1.12.0-canary-20250129-e2fed1f
+
+[compare changes](https://github.com/Basalt-Lab/basalt-logger/compare/v1.12.0-canary-20250128-2792d81...v1.12.0-canary-20250129-e2fed1f)
+
+### 🧹 Refactors
+
+- **🧹:** Update error message keys for basalt-logger localization ([727617d](https://github.com/Basalt-Lab/basalt-logger/commit/727617d))
+
+### 📦 Build
+
+- **📦:** Add tsconfig.dts.json to .npmignore ([f35f9bd](https://github.com/Basalt-Lab/basalt-logger/commit/f35f9bd))
+- **📦:** Update dependencies ([be0685c](https://github.com/Basalt-Lab/basalt-logger/commit/be0685c))
+
+### ❤️ Contributors
+
+- Ruby <necrelox@proton.me>
+
+## v1.12.0-canary-20250128-2792d81
+
+[compare changes](https://github.com/Basalt-Lab/basalt-logger/compare/v1.12.0-canary-20250124-74e684f...v1.12.0-canary-20250128-2792d81)
+
+### 📦 Build
+
+- **📦:** Use tsc to generate .d.ts and tsc alias for relative path ([6d47c51](https://github.com/Basalt-Lab/basalt-logger/commit/6d47c51))
+
+### ❤️ Contributors
+
+- Ruby <necrelox@proton.me>
+
+## v1.12.0-canary-20250124-74e684f
+
+[compare changes](https://github.com/Basalt-Lab/basalt-logger/compare/v1.12.0-canary-20250124-7745cdf...v1.12.0-canary-20250124-74e684f)
+
+### 🧹 Refactors
+
+- **🧹:** Rename error code to statusCode for clarity ([d3b3437](https://github.com/Basalt-Lab/basalt-logger/commit/d3b3437))
+
+### ❤️ Contributors
+
+- Ruby <necrelox@proton.me>
+
+## v1.12.0-canary-20250124-7745cdf
+
+[compare changes](https://github.com/Basalt-Lab/basalt-logger/compare/v1.12.0-canary-20250124-1bd6eac...v1.12.0-canary-20250124-7745cdf)
+
+### 📦 Build
+
+- **📦:** Disable minify identifiers ([c4f9ac8](https://github.com/Basalt-Lab/basalt-logger/commit/c4f9ac8))
+
+### ❤️ Contributors
+
+- Ruby <necrelox@proton.me>
+
+## v1.12.0-canary-20250124-1bd6eac
+
+[compare changes](https://github.com/Basalt-Lab/basalt-logger/compare/v1.12.0-canary-20250124-1c3d3bf...v1.12.0-canary-20250124-1bd6eac)
+
+### 📖 Documentation
+
+- **📖:** Update README & package description ([8f7d7f5](https://github.com/Basalt-Lab/basalt-logger/commit/8f7d7f5))
+
+### ❤️ Contributors
+
+- Ruby <necrelox@proton.me>
+
+## v1.12.0-canary-20250124-1c3d3bf
+
+[compare changes](https://github.com/Basalt-Lab/basalt-logger/compare/v1.12.0-canary-20250124-53f2a2f...v1.12.0-canary-20250124-1c3d3bf)
+
+### 🚀 Enhancements
+
+- **🚀:** Add 'strategy_error' message to multiple language files ([e1956fa](https://github.com/Basalt-Lab/basalt-logger/commit/e1956fa))
+
+### ❤️ Contributors
+
+- Ruby <necrelox@proton.me>
+
+## v1.12.0-canary-20250124-53f2a2f
+
+[compare changes](https://github.com/Basalt-Lab/basalt-logger/compare/v1.11.4-canary-20250123-37d2c3b...v1.12.0-canary-20250124-53f2a2f)
+
+### 🚀 Enhancements
+
+- **🚀:** Update logger strategy to support async logging ([2849190](https://github.com/Basalt-Lab/basalt-logger/commit/2849190))
+- **🚀:** Add new error const ([f7d49e4](https://github.com/Basalt-Lab/basalt-logger/commit/f7d49e4))
+
+### 🧪 Tests
+
+- **🧪:** Enhance tests with error handling and strategy registration ([9b8f3e0](https://github.com/Basalt-Lab/basalt-logger/commit/9b8f3e0))
+
+### ❤️ Contributors
+
+- Ruby <necrelox@proton.me>
+
+## v1.11.4-canary-20250123-37d2c3b
+
+[compare changes](https://github.com/Basalt-Lab/basalt-logger/compare/v1.11.3...v1.11.4-canary-20250123-37d2c3b)
+
+### 🧹 Refactors
+
+- **🧹:** Simplify error constants, tsdoc, basalt error ([ee45db1](https://github.com/Basalt-Lab/basalt-logger/commit/ee45db1))
+
+### 📦 Build
+
+- **📦:** Update dependencies and refine .npmignore ([9aa4422](https://github.com/Basalt-Lab/basalt-logger/commit/9aa4422))
+- **📦:** Change build target to bun ([1fb8a81](https://github.com/Basalt-Lab/basalt-logger/commit/1fb8a81))
+
+### ❤️ Contributors
+
+- Ruby <necrelox@proton.me>
+
 ## v1.11.3
 
 [compare changes](https://github.com/Basalt-Lab/basalt-logger/compare/v1.11.2-canary-20241220-5181144...v1.11.3)
