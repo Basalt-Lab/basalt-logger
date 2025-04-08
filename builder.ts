@@ -4,6 +4,10 @@ const dependencies = 'dependencies' in pkg ? Object.keys(pkg.dependencies ?? {})
 const devDependencies = 'devDependencies' in pkg ? Object.keys(pkg.devDependencies ?? {}) : [];
 const peerDependencies = 'peerDependencies' in pkg ? Object.keys(pkg.peerDependencies ?? {}) : [];
 
+await Bun.$`rm -rf dist`;
+
+await Bun.$`tsc --project tsconfig.dts.json`;
+
 await Bun.build({
     target: 'bun',
     external: [...dependencies, ...devDependencies, ...peerDependencies],
@@ -19,7 +23,7 @@ await Bun.build({
 
         './source/index.ts'
     ],
-    outdir: './build',
+    outdir: './dist',
     splitting: true,
     format: 'esm',
     minify: {
@@ -29,3 +33,9 @@ await Bun.build({
     },
     sourcemap: 'none'
 });
+
+await Bun.$`tsc-alias -p tsconfig.dts.json`;
+
+console.log('Build completed 🎉!');
+
+process.exit(0);

@@ -1,29 +1,18 @@
 {
   "name": "@basalt-lab/basalt-logger",
   "version": "1.12.0",
+  "author": "Ruby",
   "description": "A non-blocking logger with logging strategies",
   "type": "module",
-  "types": "./build/index.d.ts",
-  "exports": {
-    "./strategy": "./build/core/strategy/index.js",
-    "./logger": "./build/core/index.js",
-    "./error": "./build/error/index.js",
-    "./error/key": "./build/error/key/index.js",
-    "./types": "./build/types/index.js",
-    ".": "./build/index.js"
-  },
+  "license": "MIT",
   "scripts": {
+    "build": "bun builder.ts",
     "dev": "bun --watch source/index.ts",
-    "build": "bun bundler.ts && tsc --project tsconfig.dts.json && tsc-alias -p tsconfig.dts.json",
-    "start": "bun build/index.js",
-    "test": "bun test --coverage",
     "docs": "typedoc",
     "fix-lint": "eslint --fix ./source",
-    "lint": "eslint ./source"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Basalt-Lab/basalt-logger.git"
+    "lint": "eslint ./source",
+    "start": "bun build/index.js",
+    "test": "bun test --coverage"
   },
   "keywords": [
     "bun",
@@ -31,25 +20,27 @@
     "basalt",
     "logger"
   ],
-  "author": "Ruby",
-  "license": "MIT",
-  "homepage": "https://github.com/Basalt-Lab/basalt-logger#readme",
-  "bugs": {
-    "url": "https://github.com/Basalt-Lab/basalt-logger/issues"
+  "exports": {
+    "./strategy": "./dist/core/strategy/index.js",
+    "./logger": "./dist/core/index.js",
+    "./error": "./dist/error/index.js",
+    "./error/key": "./dist/error/key/index.js",
+    "./types": "./dist/types/index.js",
+    ".": "./dist/index.js"
   },
   "devDependencies": {
-    "@eslint/js": "^9.19.0",
-    "@stylistic/eslint-plugin": "^3.0.1",
-    "@types/bun": "^1.2.1",
-    "eslint": "^9.19.0",
+    "@eslint/js": "^9.24.0",
+    "@stylistic/eslint-plugin": "^4.2.0",
+    "@types/bun": "^1.2.8",
+    "eslint": "^9.24.0",
     "eslint-plugin-tsdoc": "^0.4.0",
-    "globals": "^15.14.0",
-    "tsc-alias": "^1.8.10",
-    "typedoc": "^0.27.6",
-    "typescript-eslint": "^8.22.0"
+    "globals": "^16.0.0",
+    "tsc-alias": "^1.8.13",
+    "typedoc": "^0.28.2",
+    "typescript-eslint": "^8.29.1"
   },
   "peerDependencies": {
-    "typescript": "^5.7.3"
+    "typescript": "^5.8.3"
   },
   "changelog": {
     "types": {
