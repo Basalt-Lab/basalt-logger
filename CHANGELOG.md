@@ -1,5 +1,27 @@
 # Changelog
 
+## v1.12.1-canary-20250408-8ff6c0a
+
+[compare changes](https://github.com/Basalt-Lab/basalt-logger/compare/v1.12.0...v1.12.1-canary-20250408-8ff6c0a)
+
+### 📦 Build
+
+- **📦:** [Add build script for project setup] ([76335a4](https://github.com/Basalt-Lab/basalt-logger/commit/76335a4))
+- **📦:** [Refactor TypeScript configuration for improved clarity] ## Refactoring - Consolidated TypeScript compiler options for better organization. - Enhanced module resolution and paths for improved project structure. - Added support for JavaScript files and interop constraints. ([2fe37dd](https://github.com/Basalt-Lab/basalt-logger/commit/2fe37dd))
+- **📦:** [update package.json] ([38ba782](https://github.com/Basalt-Lab/basalt-logger/commit/38ba782))
+
+### 🦉 Chore
+
+- **🦉:** [Update .gitignore for improved file exclusions] ([6ee74ff](https://github.com/Basalt-Lab/basalt-logger/commit/6ee74ff))
+
+### 🎨 Styles
+
+- **🎨:** [Refactor ESLint configuration for improved clarity] ## Refactoring - Removed unused `tsdoclint` plugin. - Updated rules for better organization and clarity. - Adjusted TypeScript rules for consistency. ([2051553](https://github.com/Basalt-Lab/basalt-logger/commit/2051553))
+
+### ❤️ Contributors
+
+- Ruby <necrelox@proton.me>
+
 ## v1.12.0
 
 [compare changes](https://github.com/Basalt-Lab/basalt-logger/compare/v1.12.0-canary-20250130-9f3764c...v1.12.0)
