@@ -1,6 +1,6 @@
 {
   "name": "@basalt-lab/basalt-logger",
-  "version": "1.12.0",
+  "version": "1.12.1-canary-20250408-8ff6c0a",
   "author": "Ruby",
   "description": "A non-blocking logger with logging strategies",
   "type": "module",
