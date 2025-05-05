@@ -1,6 +1,6 @@
 {
   "name": "@basalt-lab/basalt-logger",
-  "version": "1.12.1",
+  "version": "1.12.2-canary-20250505-340b01c",
   "author": "Ruby",
   "description": "A non-blocking logger with logging strategies",
   "type": "module",
@@ -12,7 +12,8 @@
     "fix-lint": "eslint --fix ./source",
     "lint": "eslint ./source",
     "start": "bun build/index.js",
-    "test": "bun test --coverage"
+    "test": "bun test --coverage",
+    "test:unit": "bun test --coverage $(find test/unit -name '*.spec.ts')"
   },
   "keywords": [
     "bun",
@@ -29,15 +30,15 @@
     ".": "./dist/index.js"
   },
   "devDependencies": {
-    "@eslint/js": "^9.24.0",
+    "@eslint/js": "^9.26.0",
     "@stylistic/eslint-plugin": "^4.2.0",
-    "@types/bun": "^1.2.8",
-    "eslint": "^9.24.0",
+    "@types/bun": "^1.2.12",
+    "eslint": "^9.26.0",
     "eslint-plugin-tsdoc": "^0.4.0",
     "globals": "^16.0.0",
-    "tsc-alias": "^1.8.13",
-    "typedoc": "^0.28.2",
-    "typescript-eslint": "^8.29.1"
+    "tsc-alias": "^1.8.15",
+    "typedoc": "^0.28.4",
+    "typescript-eslint": "^8.31.1"
   },
   "peerDependencies": {
     "typescript": "^5.8.3"
