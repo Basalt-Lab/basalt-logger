@@ -1,0 +1,53 @@
+name: Build
+
+on:
+  workflow_call:
+    inputs:
+      branch:
+        description: 'Branch to checkout'
+        required: true
+        type: string
+    secrets:
+      KEY_SSH:
+        required: true
+
+jobs:
+  build:
+    name: Check Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch }}
+          fetch-depth: 0
+          ssh-key: ${{ secrets.KEY_SSH }}
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install Dependencies
+        run: bun install
+
+      - name: Run Build and update Summary
+        id: build_step
+        run: |
+          start=$(date +%s)
+          if bun run build; then
+            status="✅ Success"
+            exit_code=0
+          else
+            status="❌ Failed"
+            exit_code=1
+          fi
+          end=$(date +%s)
+          duration=$((end - start))
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## 🏗️ Build Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Duration (s) | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|:------------:|:-------:|" >> $GITHUB_STEP_SUMMARY
+          echo "| $duration | $status |" >> $GITHUB_STEP_SUMMARY
+          exit $exit_code

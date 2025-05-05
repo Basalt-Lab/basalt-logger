@@ -1,0 +1,77 @@
+name: Unit Test
+
+on:
+  workflow_call:
+    inputs:
+      branch:
+        description: 'Branch to checkout'
+        required: true
+        type: string
+    secrets:
+      KEY_SSH:
+        required: true
+
+jobs:
+  unit-test:
+    name: Check unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch }}
+          fetch-depth: 0
+          ssh-key: ${{ secrets.KEY_SSH }}
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install Dependencies
+        run: bun install
+
+      - name: Run Unit Tests and update Summary
+        id: unit_test
+        run: |
+          start=$(date +%s)
+          # Run tests and capture output
+          if bun run test:unit > unit-test.log 2>&1; then
+            status="success"
+            exit_code=0
+          else
+            status="failed"
+            exit_code=1
+          fi
+          end=$(date +%s)
+          duration=$((end - start))
+          passed=$(grep -o 'PASS' unit-test.log | wc -l)
+          failed=$(grep -o 'FAIL' unit-test.log | wc -l)
+          echo "status=$status" >> $GITHUB_OUTPUT
+          echo "duration=$duration" >> $GITHUB_OUTPUT
+          echo "passed=$passed" >> $GITHUB_OUTPUT
+          echo "failed=$failed" >> $GITHUB_OUTPUT
+          exit $exit_code
+
+      - name: Final Summary
+        run: |
+          status="${{ steps.unit_test.outputs.status }}"
+          duration="${{ steps.unit_test.outputs.duration }}"
+          passed="${{ steps.unit_test.outputs.passed }}"
+          failed="${{ steps.unit_test.outputs.failed }}"
+          if [ "$status" = "success" ]; then
+            status_icon="✅ Success"
+          else
+            status_icon="❌ Failed"
+          fi
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "## 🧪 Unit Test Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Status | Duration (s) | Passed | Failed |" >> $GITHUB_STEP_SUMMARY
+          echo "|:------:|:------------:|:------:|:------:|" >> $GITHUB_STEP_SUMMARY
+          echo "| $status_icon | $duration | $passed | $failed |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ "$status" = "success" ]; then
+            echo "All unit tests passed." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "Some unit tests failed. See logs above for details." >> $GITHUB_STEP_SUMMARY
