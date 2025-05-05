@@ -36,22 +36,23 @@ jobs:
         run: |
           start=$(date +%s%3N)
           # Run tests and capture output
-          if bun run test:unit > unit-test.log 2>&1; then
-            status="success"
-            exit_code=0
-          else
-            status="failed"
-            exit_code=1
-          fi
+          bun run test:unit > unit-test.log 2>&1
+          status_code=$?
           end=$(date +%s%3N)
           duration_ms=$((end - start))
-          passed=$(grep -o 'PASS' unit-test.log | wc -l)
-          failed=$(grep -o 'FAIL' unit-test.log | wc -l)
+          # Extract pass/fail from output summary
+          pass=$(grep -Eo '([0-9]+) pass' unit-test.log | tail -1 | grep -Eo '[0-9]+' || echo 0)
+          fail=$(grep -Eo '([0-9]+) fail' unit-test.log | tail -1 | grep -Eo '[0-9]+' || echo 0)
+          if [ "$status_code" = "0" ]; then
+            status="success"
+          else
+            status="failed"
+          fi
           echo "status=$status" >> $GITHUB_OUTPUT
           echo "duration_ms=$duration_ms" >> $GITHUB_OUTPUT
-          echo "passed=$passed" >> $GITHUB_OUTPUT
-          echo "failed=$failed" >> $GITHUB_OUTPUT
-          exit $exit_code
+          echo "passed=$pass" >> $GITHUB_OUTPUT
+          echo "failed=$fail" >> $GITHUB_OUTPUT
+          exit $status_code
 
       - name: Final Summary
         run: |
