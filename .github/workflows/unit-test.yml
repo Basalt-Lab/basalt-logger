@@ -75,3 +75,4 @@ jobs:
             echo "All unit tests passed." >> $GITHUB_STEP_SUMMARY
           else
             echo "Some unit tests failed. See logs above for details." >> $GITHUB_STEP_SUMMARY
+          fi
