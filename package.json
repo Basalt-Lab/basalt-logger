@@ -12,7 +12,8 @@
     "fix-lint": "eslint --fix ./source",
     "lint": "eslint ./source",
     "start": "bun build/index.js",
-    "test": "bun test --coverage"
+    "test": "bun test --coverage",
+    "test:unit": "bun test --coverage $(find test/unit -name '*.spec.ts')"
   },
   "keywords": [
     "bun",
