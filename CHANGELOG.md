@@ -1,5 +1,39 @@
 # Changelog
 
+## v1.12.2-canary-20250505-340b01c
+
+[compare changes](https://github.com/Basalt-Lab/basalt-logger/compare/v1.12.1-canary-20250408-8ff6c0a...v1.12.2-canary-20250505-340b01c)
+
+### 🧹 Refactors
+
+- **🧹:** [refactor import statements in basaltLogger.ts] ([dd24154](https://github.com/Basalt-Lab/basalt-logger/commit/dd24154))
+
+### 📦 Build
+
+- **📦:** [update devDependencies in package.json] ## Build Changes - Updated `@eslint/js` from `^9.24.0` to `^9.26.0` - Updated `@types/bun` from `^1.2.8` to `^1.2.12` - Updated `eslint` from `^9.24.0` to `^9.26.0` - Updated `tsc-alias` from `^1.8.13` to `^1.8.15` - Updated `typedoc` from `^0.28.2` to `^0.28.4` - Updated `typescript-eslint` from `^8.29.1` to `^8.31.1` ([46884ed](https://github.com/Basalt-Lab/basalt-logger/commit/46884ed))
+
+### 🦉 Chore
+
+- **🦉:** V1.12.1 ([a8132d9](https://github.com/Basalt-Lab/basalt-logger/commit/a8132d9))
+- **🦉:** [add unit test script to package.json] ([355b08e](https://github.com/Basalt-Lab/basalt-logger/commit/355b08e))
+
+### 🤖 CI
+
+- **🤖:** [enhance pull request checker workflow] ([9189537](https://github.com/Basalt-Lab/basalt-logger/commit/9189537))
+- **🤖:** [add reusable GitHub workflows for build, lint, test, and publish] ## CI Changes - Added `build.yml`: Defines a reusable workflow for building the project. - Added `lint.yml`: Implements a reusable workflow for linting the code with auto-fix capabilities. - Added `unit-test.yml`: Establishes a reusable workflow for running unit tests and summarizing results. - Added `create-github-release.yml`: Creates a reusable workflow for publishing releases on GitHub. - Added `publish-npm.yml`: Sets up a reusable workflow for publishing the package to NPM. ([1967cdd](https://github.com/Basalt-Lab/basalt-logger/commit/1967cdd))
+- **🤖:** [refactor CI workflows for merge and pull request checks] - Updated `merge-dev.yml` and `merge-main.yml` to streamline job definitions and enhance reusability. - Consolidated lint, build, unit-test, create-github-release, and publish-npm jobs using reusable workflows. - Improved `pull-request-checker.yml` by removing redundant steps and utilizing reusable lint and build workflows. ([9b65e4a](https://github.com/Basalt-Lab/basalt-logger/commit/9b65e4a))
+- **🤖:** [add reusable workflows for build, lint, unit test, and release] ([31151a8](https://github.com/Basalt-Lab/basalt-logger/commit/31151a8))
+- **🤖:** [add final summary for unit test results] ## CI Changes - Added a final summary step to the unit test workflow. ## Description This change introduces a final summary output that indicates whether all unit tests passed or if some tests failed, providing clearer feedback in the workflow logs. ([69a85f7](https://github.com/Basalt-Lab/basalt-logger/commit/69a85f7))
+- **🤖:** [enhance build and unit test summaries with duration and status] ## CI Changes - Updated build and unit test workflows to use millisecond precision for duration. - Improved final summary output to include status icons and detailed messages. - Changed summary tables to display duration in milliseconds for better clarity. ([6a0b5b4](https://github.com/Basalt-Lab/basalt-logger/commit/6a0b5b4))
+- **🤖:** [refactor unit test step for improved output handling] ([b2518fd](https://github.com/Basalt-Lab/basalt-logger/commit/b2518fd))
+- **🤖:** Update .github/workflows/create-github-release.yml ([ddce37c](https://github.com/Basalt-Lab/basalt-logger/commit/ddce37c))
+
+### ❤️ Contributors
+
+- Necrelox ([@Necrelox](https://github.com/Necrelox))
+- Ruby <necrelox@proton.me>
+- Github-actions <necrelox@proton.me>
+
 ## v1.12.1
 
 [compare changes](https://github.com/Basalt-Lab/basalt-logger/compare/v1.12.1-canary-20250408-8ff6c0a...v1.12.1)
