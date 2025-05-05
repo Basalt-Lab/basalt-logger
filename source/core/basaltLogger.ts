@@ -1,4 +1,5 @@
-import { EventEmitter, once, Transform } from 'stream';
+import { EventEmitter, Transform } from 'stream';
+import { once } from 'events';
 
 import { BasaltError } from '#/error/basaltError';
 import { LOGGER_KEY_ERROR } from '#/error/key/loggerKeyError';
