@@ -99,7 +99,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           echo "Using tag: ${{ steps.latest_tag.outputs.tag_name }}"
-          if ${{ inputs.isPrerelease }}; then
+          if [ "${{ inputs.isPrerelease }}" = "true" ]; then
             gh release create "${{ steps.latest_tag.outputs.tag_name }}" \
               --title "Release ${{ steps.latest_tag.outputs.tag_name }}" \
               --notes "$(cat temp.md)" \
