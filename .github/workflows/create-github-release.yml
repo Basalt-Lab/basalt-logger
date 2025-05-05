@@ -113,6 +113,13 @@ jobs:
               --latest
           fi
 
+      - name: Rebase develop branch to main
+        if: ${{ inputs.isPrerelease == false }}
+        run: |
+          git checkout develop
+          git rebase main
+          git push origin develop
+
       - name: Final Summary
         run: |
           tag="${{ steps.latest_tag.outputs.tag_name }}"
