@@ -1,4 +1,4 @@
-name: Publish Release
+name: Reusable Publish Release
 
 on:
   workflow_call:
@@ -22,7 +22,7 @@ on:
         required: true
       GIT_EMAIL:
         required: true
-      GITHUB_TOKEN:
+      GH_TOKEN:
         required: true
 
 jobs:
@@ -96,7 +96,7 @@ jobs:
 
       - name: Create GitHub Release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           echo "Using tag: ${{ steps.latest_tag.outputs.tag_name }}"
           if ${{ inputs.isPrerelease }}; then

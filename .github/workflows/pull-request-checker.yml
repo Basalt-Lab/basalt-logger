@@ -15,7 +15,7 @@ on:
 
 jobs:
   lint:
-    uses: ./.github/workflows/reusable/lint.yml
+    uses: ./.github/workflows/lint.yml
     with:
       branch: ${{ github.head_ref }}
     secrets:
@@ -25,7 +25,7 @@ jobs:
 
   build:
     needs: lint
-    uses: ./.github/workflows/reusable/build.yml
+    uses: ./.github/workflows/build.yml
     with:
       branch: ${{ github.head_ref }}
     secrets:
@@ -33,7 +33,7 @@ jobs:
 
   unit-test:
     needs: build
-    uses: ./.github/workflows/reusable/unit-test.yml
+    uses: ./.github/workflows/unit-test.yml
     with:
       branch: ${{ github.head_ref }}
     secrets:
