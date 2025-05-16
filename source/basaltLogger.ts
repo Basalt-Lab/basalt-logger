@@ -1,10 +1,10 @@
-import { EventEmitter, Transform } from 'stream';
 import { once } from 'events';
+import { EventEmitter, Transform } from 'stream';
 
-import { BasaltError } from '#/error/basaltError';
-import { LOGGER_KEY_ERROR } from '#/error/key/loggerKeyError';
-import type { LoggerStrategy } from '#/types/data/loggerStrategy';
-import type { LogLevels } from '#/types/data/logLevels';
+import { loggerKeyError } from './enums/loggerKeyError';
+import { BasaltError } from './error/basaltError';
+import type { LoggerStrategy } from './types/loggerStrategy';
+import type { LogLevels } from './types/logLevels';
 
 /**
  * Interface for the log stream object.
@@ -116,7 +116,7 @@ export class BasaltLogger extends EventEmitter {
         if (this._strategies.has(name))
             throw new BasaltError({
                 message: `The strategy "${name}" is already added.`,
-                key: LOGGER_KEY_ERROR.STRATEGY_ALREADY_ADDED,
+                key: loggerKeyError.stategyAlreadyAdded,
                 cause: {
                     strategyName: name
                 }
@@ -135,7 +135,7 @@ export class BasaltLogger extends EventEmitter {
         if (!this._strategies.has(name))
             throw new BasaltError({
                 message: `The strategy "${name}" is not found.`,
-                key: LOGGER_KEY_ERROR.STRATEGY_NOT_FOUND,
+                key: loggerKeyError.strategyNotFound,
                 cause: {
                     strategyName: name
                 }
@@ -245,7 +245,7 @@ export class BasaltLogger extends EventEmitter {
             } catch (error) {
                 throw new BasaltError({
                     message: `An error occurred while executing the strategy "${name}".`,
-                    key: LOGGER_KEY_ERROR.LOGGER_STRATEGY_ERROR,
+                    key: loggerKeyError.loggerStrategyError,
                     cause: {
                         strategyName: name,
                         object,
@@ -269,7 +269,7 @@ export class BasaltLogger extends EventEmitter {
         if (this._strategies.size === 0)
             throw new BasaltError({
                 message: 'No strategy is added.',
-                key: LOGGER_KEY_ERROR.NO_STRATEGY_ADDED
+                key: loggerKeyError.noStrategyAdded
             });
 
         if (this._pendingLogs.length >= this._maxPendingLogs)

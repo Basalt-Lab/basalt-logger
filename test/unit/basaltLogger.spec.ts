@@ -3,10 +3,10 @@
 import { describe, expect, test } from 'bun:test';
 import { Transform } from 'stream';
 
-import { BasaltLogger } from '#/core/basaltLogger';
+import { BasaltLogger } from '#/basaltLogger';
 import { BasaltError } from '#/error/basaltError';
-import type { LoggerStrategy } from '#/types/data/loggerStrategy';
-import type { LogLevels } from '#/types/data/logLevels';
+import type { LoggerStrategy } from '#/types/loggerStrategy';
+import type { LogLevels } from '#/types/logLevels';
 
 describe('BasaltLogger', () => {
     describe('constructor', () => {
