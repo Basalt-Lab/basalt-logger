@@ -1,18 +1,17 @@
 # 📦 Basalt-logger
 
+> ONLY FOR BUN
+
 ## 📌 Table of contents
 
 - [📦 Basalt-logger](#-basalt-logger)
   - [📌 Table of contents](#-table-of-contents)
   - [📝 Description](#-description)
   - [🌟 Documentation](#-Documentation)
-  - [🔧 Installation](#-installation)
   - [⚖️ License](#-license)
   - [📧 Contact](#-contact)
 
 ## 📝 Description
-
-> ONLY FOR BUN
 
 **Basalt-logger** is a package that allows you to log events in your application in a simple and elegant way.
 
@@ -22,12 +21,6 @@ He is non-blocking and allows you to have multiple logging strategies. This mean
 
 - [Documentation](https://basalt-lab.github.io/basalt-doc/index.html).
 - [References](https://basalt-lab.github.io/basalt-logger/index.html).
-
-## 🔧 Installation
-
-```bash
-bun add @basalt-lab/basalt-logger
-```
 
 ## ⚖️ License
 
