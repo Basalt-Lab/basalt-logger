@@ -1,103 +1,73 @@
 import { once } from 'events';
-import { EventEmitter, Transform } from 'stream';
+import { Transform } from 'stream';
 
 import { loggerKeyError } from './enums/loggerKeyError';
 import { BasaltError } from './error/basaltError';
-import type { LoggerStrategy } from './types/loggerStrategy';
+import type { BasaltLoggerEvent } from './events/basaltLoggerEvents';
+import type { BodiesIntersection } from './types/bodiesIntersection';
 import type { LogLevels } from './types/logLevels';
+import type { LogStreamChunk } from './types/logStreamChunk';
+import type { LoggerStrategy } from './types/loggerStrategy';
+import type { StrategyMap } from './types/strategyMap';
+import { TypedEventEmitter } from './utils/typedEventEmitter';
+
 
 /**
- * Interface for the log stream object.
- */
-interface LogStreamObject {
-    date: string;
-    level: LogLevels;
-    object: unknown;
-    strategiesNames: string[];
-}
-
-/**
- * Enum for the logger events.
- */
-export const BASALT_LOGGER_EVENTS = {
-    ERROR: 'error',
-    END: 'end'
-};
-
-/**
- * BasaltLogger provides a flexible logging system that allows multiple strategies for log output.
+ * BasaltLogger provides a flexible, type-safe logging system that allows multiple strategies for log output.
  * The logger uses a transform stream to process log entries and execute the logging strategies.
  *
- * BasaltLogger extends the {@link EventEmitter} class to emit events when an error occurs or when the logger ends.
+ * BasaltLogger extends the {@link TypedEventEmitter} class to emit typed events when an error occurs or when the logger ends.
  * The logger can log messages with different levels: error, warn, info, debug, and log.
  *
- * @example
- * ```typescript
- * import { BasaltLogger, ConsoleLoggerStrategy, FileLoggerStrategy } from '@basalt-lab/basalt-logger';
- *
- * const logger = new BasaltLogger(); // u can pass the maxPendingLogs as an argument (default: 10_000)
- *
- * logger.on('error', (error) => { // optional
- *     console.error(error);
- * });
- *
- * logger.on('end', () => { // optional
- *     console.log('End');
- * });
- *
- * logger.registerStrategies([
- *     ['console', new ConsoleLoggerStrategy(true)],
- *     ['file', new FileLoggerStrategy('./log.txt')]
- * ]);
- * logger.log('Hello World'); // logs a message in all strategies
- * logger.log('Use all strategies', ['console', 'file']); // logs a message in the console and file strategies
- * logger.log('Use console strategy', ['console']); // logs a message only in the console strategy
- * logger.log('Use file strategy', ['file']); // logs a message only in the file strategy
- * ```
+ * @template TStrategies - The map of strategy names to LoggerStrategy types.
  */
-export class BasaltLogger extends EventEmitter {
+export class BasaltLogger<TStrategies extends StrategyMap = {}> extends TypedEventEmitter<BasaltLoggerEvent> {
     /**
-     * Stores the logging strategies mapped by their names. ({@link LoggerStrategy})
+     * The map of strategies.
      */
-    private readonly _strategies = new Map<string, LoggerStrategy>();
+    private readonly _strategies: TStrategies;
 
     /**
-     * Transform stream to process log entries. ({@link Transform})
+     * The transform stream for processing log entries.
      */
+
     private readonly _logStream: Transform;
 
     /**
-     * Stores the pending log entries. ({@link LogStreamObject})
+     * The queue of pending log entries.
      */
-    private readonly _pendingLogs: LogStreamObject[] = [];
+
+    private readonly _pendingLogs: LogStreamChunk<unknown, TStrategies>[] = [];
 
     /**
      * The maximum number of pending logs.
+     * @defaultValue 10_000
      */
     private readonly _maxPendingLogs;
 
     /**
-     * Indicates if the logger is writing log entries
+     * Flag to indicate if the logger is currently writing logs.
      */
     private _isWriting = false;
 
     /**
-     * Initializes the BasaltLogger, creates the log stream ({@link Transform}).
-     * The log stream processes the log entries and executes the logging strategies.
+     * Construct a BasaltLogger.
      *
-     * @param maxPendingLogs - The maximum number of pending logs. (default: 10_000)
+     * @template TStrategies - The map of strategy names to LoggerStrategy types.
+     * @param strategies - Initial strategies map.
+     * @param maxPendingLogs - Maximum number of logs in the queue (default: 10_000)
      */
-    public constructor(maxPendingLogs = 10_000) {
+    public constructor(strategies: TStrategies = {} as TStrategies, maxPendingLogs = 10_000) {
         super();
+        this._strategies = strategies;
         this._maxPendingLogs = maxPendingLogs;
         this._logStream = new Transform({
             objectMode: true,
-            transform: (chunk: LogStreamObject, _, callback): void => {
+            transform: (chunk: LogStreamChunk<unknown, TStrategies>, _, callback): void => {
                 this._executeStrategies(chunk.level, new Date(chunk.date), chunk.object, chunk.strategiesNames)
                     .then(() => callback())
                     .catch((error: unknown) => {
-                        if (this.listenerCount(BASALT_LOGGER_EVENTS.ERROR) > 0)
-                            this.emit(BASALT_LOGGER_EVENTS.ERROR, error);
+                        this.emit('error', error as Error);
                         callback();
                     });
             }
@@ -105,179 +75,240 @@ export class BasaltLogger extends EventEmitter {
     }
 
     /**
-     * Registers a new logging strategy.
+     * Register a new logging strategy.
      *
-     * @param name - The name of the strategy.
-     * @param strategy - The strategy to add. ({@link LoggerStrategy})
+     * @template Key - The name of the strategy.
+     * @template Strategy - The strategy type.
      *
-     * @throws ({@link BasaltError}) - If the strategy is already added. ({@link GLOBAL_KEY_ERROR.STRATEGY_ALREADY_ADDED})
+     * @throws ({@link BasaltError}): If the strategy is already added. ({@link loggerKeyError.stategyAlreadyAdded})
+     *
+     * @returns A new BasaltLogger instance with the added strategy.
      */
-    public registerStrategy(name: string, strategy: LoggerStrategy): void {
-        if (this._strategies.has(name))
+    public registerStrategy<Key extends string, Strategy extends LoggerStrategy>(
+        name: Key,
+        strategy: Strategy
+    ): BasaltLogger<TStrategies & Record<Key, Strategy>> {
+        if ((this._strategies as Record<string, LoggerStrategy>)[name])
             throw new BasaltError({
-                message: `The strategy "${name}" is already added.`,
                 key: loggerKeyError.stategyAlreadyAdded,
-                cause: {
-                    strategyName: name
-                }
+                message: `The strategy "${name}" is already added.`,
+                cause: { strategyName: name }
             });
-        this._strategies.set(name, strategy);
+        return new BasaltLogger({
+            ...this._strategies,
+            [name]: strategy
+        }, this._maxPendingLogs);
     }
 
     /**
-     * Unregisters a logging strategy.
+     * Unregister a logging strategy.
      *
-     * @param name - The name of the strategy.
+     * @template Key - The name of the strategy.
      *
-     * @throws ({@link BasaltError}) - If the strategy is not found. ({@link GLOBAL_KEY_ERROR.STRATEGY_NOT_FOUND})
+     * @throws ({@link BasaltError}): If the strategy is not found. ({@link loggerKeyError.strategyNotFound})
+     *
+     * @returns A new BasaltLogger instance without the removed strategy.
      */
-    public unregisterStrategy(name: string): void {
-        if (!this._strategies.has(name))
+    public unregisterStrategy<Key extends keyof TStrategies>(
+        name: Key
+    ): BasaltLogger<Omit<TStrategies, Key>> {
+        if (!(name in this._strategies))
             throw new BasaltError({
-                message: `The strategy "${name}" is not found.`,
                 key: loggerKeyError.strategyNotFound,
-                cause: {
-                    strategyName: name
-                }
+                message: `The strategy "${String(name)}" is not found.`,
+                cause: { strategyName: name }
             });
-        this._strategies.delete(name);
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { [name]: _, ...rest } = this._strategies;
+        return new BasaltLogger(rest, this._maxPendingLogs);
     }
 
     /**
-     * Registers multiple logging strategies.
+     * Register multiple strategies at once.
      *
-     * @param strategies - The strategies to add. ({@link LoggerStrategy})
+     * @template TNew - The new strategies to add.
      *
-     * @throws ({@link BasaltError}) - If the strategy is already added. ({@link GLOBAL_KEY_ERROR.STRATEGY_ALREADY_ADDED})
+     * @throws ({@link BasaltError}): If any strategy is already added. ({@link loggerKeyError.stategyAlreadyAdded})
+     *
+     * @returns A new BasaltLogger instance with the added strategies.
      */
-    public registerStrategies(strategies: [string, LoggerStrategy][]): void {
-        for (const [name, strategy] of strategies)
-            this.registerStrategy(name, strategy);
+    public registerStrategies<TNew extends [string, LoggerStrategy][] = [string, LoggerStrategy][]>(
+        strategies: TNew
+    ): BasaltLogger<TStrategies & { [K in TNew[number][0]]: Extract<TNew[number], [K, LoggerStrategy]>[1] }> {
+        return strategies.reduce(
+            (logger, [name, strategy]) => logger.registerStrategy(name, strategy), this as unknown as BasaltLogger<StrategyMap>
+        ) as unknown as BasaltLogger<TStrategies & { [K in TNew[number][0]]: Extract<TNew[number], [K, LoggerStrategy]>[1] }>;
     }
 
     /**
-     * Unregisters multiple logging strategies.
+     * Unregister multiple strategies at once.
      *
-     * @param names - The names of the strategies to remove.
+     * @template Keys - The names of the strategies to remove.
      *
-     * @throws ({@link BasaltError}) - If the strategy is not found. ({@link GLOBAL_KEY_ERROR.STRATEGY_NOT_FOUND})
+     * @throws ({@link BasaltError}): If any strategy is not found. ({@link loggerKeyError.strategyNotFound})
+     *
+     * @returns A new BasaltLogger instance without the removed strategies.
      */
-    public unregisterStrategies(names: string[]): void {
+    public unregisterStrategies<Keys extends Extract<keyof TStrategies, string>>(
+        names: Keys[]
+    ): BasaltLogger<Omit<TStrategies, Keys>> {
+        let logger: BasaltLogger<StrategyMap> = this as unknown as BasaltLogger<StrategyMap>;
         for (const name of names)
-            this.unregisterStrategy(name);
+            logger = logger.unregisterStrategy(name) as unknown as BasaltLogger<StrategyMap>;
+        return logger as unknown as BasaltLogger<Omit<TStrategies, Keys>>;
     }
 
     /**
-     * Clears all logging strategies.
+     * Remove all strategies.
+     *
+     * @returns A new BasaltLogger instance without any strategies.
      */
-    public clearStrategies(): void {
-        this._strategies.clear();
+    public clearStrategies(): BasaltLogger {
+        return new BasaltLogger({}, this._maxPendingLogs);
     }
 
     /**
-     * Logs an error message.
+     * Log an error message.
      *
-     * @param object - The object to log.
-     * @param strategiesNames - The names of the strategies to use. (default: all strategies)
+     * @template SNames - The names of the strategies to use.
      *
-     * @throws ({@link BasaltError}) - If no strategy is added. ({@link GLOBAL_KEY_ERROR.NO_STRATEGY_ADDED})
+     * @param object - The object to log. ({@link BodiesIntersection})
+     * @param strategiesNames - The names of the strategies to use. If not provided, all strategies will be used.
+     *
+     * @throws ({@link BasaltError}): If no strategy is added. ({@link loggerKeyError.noStrategyAdded})
      */
-    public error<T>(object: T, strategiesNames?: string[]): void {
+    public error<SNames extends (keyof TStrategies)[] = (keyof TStrategies)[]>(
+        object: BodiesIntersection<TStrategies, SNames[number]>,
+        strategiesNames?: SNames
+    ): void {
         this._out('ERROR', object, strategiesNames);
     }
 
     /**
-     * Logs a warn message.
+     * Log a warning message.
      *
-     * @param object - The object to log.
-     * @param strategiesNames - The names of the strategies to use. (default: all strategies)
+     * @template SNames - The names of the strategies to use.
      *
-     * @throws ({@link BasaltError}) - If no strategy is added. ({@link GLOBAL_KEY_ERROR.NO_STRATEGY_ADDED})
+     * @param object - The object to log. ({@link BodiesIntersection})
+     * @param strategiesNames - The names of the strategies to use. If not provided, all strategies will be used.
+     *
+     * @throws ({@link BasaltError}): If no strategy is added. ({@link loggerKeyError.noStrategyAdded})
      */
-    public warn<T>(object: T, strategiesNames?: string[]): void {
+    public warn<SNames extends (keyof TStrategies)[] = (keyof TStrategies)[]>(
+        object: BodiesIntersection<TStrategies, SNames[number]>,
+        strategiesNames?: SNames
+    ): void {
         this._out('WARN', object, strategiesNames);
     }
 
     /**
-     * Logs an info message.
+     * Log an info message.
      *
-     * @param object - The object to log.
-     * @param strategiesNames - The names of the strategies to use. (default: all strategies)
+     * @template SNames - The names of the strategies to use.
      *
-     * @throws ({@link BasaltError}) - If no strategy is added. ({@link GLOBAL_KEY_ERROR.NO_STRATEGY_ADDED})
+     * @param object - The object to log. ({@link BodiesIntersection})
+     * @param strategiesNames - The names of the strategies to use. If not provided, all strategies will be used.
+     *
+     * @throws ({@link BasaltError}): If no strategy is added. ({@link loggerKeyError.noStrategyAdded})
      */
-    public info<T>(object: T, strategiesNames?: string[]): void {
+    public info<SNames extends (keyof TStrategies)[] = (keyof TStrategies)[]>(
+        object: BodiesIntersection<TStrategies, SNames[number]>,
+        strategiesNames?: SNames
+    ): void {
         this._out('INFO', object, strategiesNames);
     }
 
     /**
-     * Logs a debug message.
+     * Log a debug message.
      *
-     * @param object - The object to log.
-     * @param strategiesNames - The names of the strategies to use. (default: all strategies)
+     * @template SNames - The names of the strategies to use.
+     *
+     * @param object - The object to log. ({@link BodiesIntersection})
+     * @param strategiesNames - The names of the strategies to use. If not provided, all strategies will be used.
+     *
+     * @throws ({@link BasaltError}): If no strategy is added. ({@link loggerKeyError.noStrategyAdded})
      */
-    public debug<T>(object: T, strategiesNames?: string[]): void {
+    public debug<SNames extends (keyof TStrategies)[] = (keyof TStrategies)[]>(
+        object: BodiesIntersection<TStrategies, SNames[number]>,
+        strategiesNames?: SNames
+    ): void {
         this._out('DEBUG', object, strategiesNames);
     }
 
     /**
-     * Logs a log message.
+     * Log a generic message.
      *
-     * @param object - The object to log.
-     * @param strategiesNames - The names of the strategies to use. (default: all strategies)
+     * @template SNames - The names of the strategies to use.
+     *
+     * @param object - The object to log. ({@link BodiesIntersection})
+     * @param strategiesNames - The names of the strategies to use. If not provided, all strategies will be used.
+     *
+     * @throws ({@link BasaltError}): If no strategy is added. ({@link loggerKeyError.noStrategyAdded})
      */
-    public log<T>(object: T, strategiesNames?: string[]): void {
+    public log<SNames extends (keyof TStrategies)[] = (keyof TStrategies)[]>(
+        object: BodiesIntersection<TStrategies, SNames[number]>,
+        strategiesNames?: SNames
+    ): void {
         this._out('LOG', object, strategiesNames);
     }
 
     /**
-     * Executes the logging strategies.
+     * Internal: execute all strategies for a log event.
      *
-     * @param level - The log level. ({@link LogLevels})
-     * @param date - The date of the log entry.
-     * @param object - The object to log.
-     * @param strategiesNames - The names of the strategies to use.
+     * @template TLogObject - The type of the log object.
+     *
+     * @throws ({@link BasaltError}): If a strategy throws. ({@link loggerKeyError.loggerStrategyError})
      */
-    private async _executeStrategies<T>(level: LogLevels, date: Date, object: T, strategiesNames: string[]): Promise<void> {
+    private async _executeStrategies<TLogObject>(
+        level: LogLevels,
+        date: Date,
+        object: TLogObject,
+        strategiesNames: (keyof TStrategies)[]
+    ): Promise<void> {
         await Promise.all(strategiesNames.map(async (name) => {
             try {
-                await this._strategies.get(name)?.log(level, date, object);
+                await (this._strategies[name] as LoggerStrategy<TLogObject> | undefined)?.log(level, date, object);
             } catch (error) {
                 throw new BasaltError({
-                    message: `An error occurred while executing the strategy "${name}".`,
                     key: loggerKeyError.loggerStrategyError,
-                    cause: {
-                        strategyName: name,
-                        object,
-                        error
-                    }
+                    message: `An error occurred while executing the strategy "${String(name)}".`,
+                    cause: { strategyName: name, object, error }
                 });
             }
         }));
     }
 
     /**
-     * Outputs the log entry.
+     * Internal: queue a log event and start writing if not already.
+     *
+     * @template TLogObject - The type of the log object.
      *
      * @param level - The log level. ({@link LogLevels})
      * @param object - The object to log.
-     * @param strategiesNames - The names of the strategies to use. (default: all strategies)
+     * @param strategiesNames - The names of the strategies to use. If not provided, all strategies will be used.
      *
-     * @throws ({@link BasaltError}) - If no strategy is added. ({@link GLOBAL_KEY_ERROR.NO_STRATEGY_ADDED})
+     * @throws ({@link BasaltError}): If no strategy is added. ({@link loggerKeyError.noStrategyAdded})
      */
-    private _out<T>(level: LogLevels, object: T, strategiesNames: string[] = [...this._strategies.keys()]): void {
-        if (this._strategies.size === 0)
+    private _out<TLogObject>(
+        level: LogLevels,
+        object: TLogObject,
+        strategiesNames?: (keyof TStrategies)[]
+    ): void {
+        const strategyKeys = Object.keys(this._strategies) as (keyof TStrategies)[];
+        if (strategyKeys.length === 0)
             throw new BasaltError({
                 message: 'No strategy is added.',
                 key: loggerKeyError.noStrategyAdded
             });
-
         if (this._pendingLogs.length >= this._maxPendingLogs)
             return;
-
-        const log: LogStreamObject = { date: new Date().toISOString(), level, object, strategiesNames };
+        const log: LogStreamChunk<TLogObject, TStrategies> = {
+            date: new Date().toISOString(),
+            level,
+            object,
+            strategiesNames: strategiesNames ? strategiesNames : strategyKeys
+        };
         this._pendingLogs.push(log);
-
         if (!this._isWriting) {
             this._isWriting = true;
             setImmediate(() => {
@@ -287,17 +318,17 @@ export class BasaltLogger extends EventEmitter {
     }
 
     /**
-     * Writes the log entries.
+     * Internal: process the log queue and emit 'end' when done.
      */
     private async _writeLog(): Promise<void> {
         while (this._pendingLogs.length > 0) {
             const pendingLog = this._pendingLogs.shift();
+            if (!pendingLog) continue;
             const canWrite = this._logStream.write(pendingLog);
             if (!canWrite)
                 await once(this._logStream, 'drain');
         }
         this._isWriting = false;
-        if (this.listenerCount(BASALT_LOGGER_EVENTS.END) > 0)
-            this.emit(BASALT_LOGGER_EVENTS.END);
+        this.emit('end');
     }
 }
