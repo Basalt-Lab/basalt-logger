@@ -1,4 +1,4 @@
-export const loggerKeyError = {
+export const loggerErrorKeys = {
     stategyAlreadyAdded: 'basalt-logger.error.strategy_already_added',
     strategyNotFound: 'basalt-logger.error.strategy_not_found',
     noStrategyAdded: 'basalt-logger.error.no_strategy_added',

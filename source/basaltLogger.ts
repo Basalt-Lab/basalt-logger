@@ -1,7 +1,7 @@
 import { once } from 'events';
 import { Transform } from 'stream';
 
-import { loggerKeyError } from './enums/loggerKeyError';
+import { loggerErrorKeys } from './enums/loggerErrorKeys';
 import { BasaltError } from './error/basaltError';
 import type { BasaltLoggerEvent } from './events/basaltLoggerEvents';
 import type { BodiesIntersection } from './types/bodiesIntersection';
@@ -10,7 +10,6 @@ import type { LogStreamChunk } from './types/logStreamChunk';
 import type { LoggerStrategy } from './types/loggerStrategy';
 import type { StrategyMap } from './types/strategyMap';
 import { TypedEventEmitter } from './utils/typedEventEmitter';
-
 
 /**
  * BasaltLogger provides a flexible, type-safe logging system that allows multiple strategies for log output.
@@ -80,7 +79,7 @@ export class BasaltLogger<TStrategies extends StrategyMap = {}> extends TypedEve
      * @template Key - The name of the strategy.
      * @template Strategy - The strategy type.
      *
-     * @throws ({@link BasaltError}): If the strategy is already added. ({@link loggerKeyError.stategyAlreadyAdded})
+     * @throws ({@link BasaltError}): If the strategy is already added. ({@link loggerErrorKeys.stategyAlreadyAdded})
      *
      * @returns A new BasaltLogger instance with the added strategy.
      */
@@ -90,7 +89,7 @@ export class BasaltLogger<TStrategies extends StrategyMap = {}> extends TypedEve
     ): BasaltLogger<TStrategies & Record<Key, Strategy>> {
         if ((this._strategies as Record<string, LoggerStrategy>)[name])
             throw new BasaltError({
-                key: loggerKeyError.stategyAlreadyAdded,
+                key: loggerErrorKeys.stategyAlreadyAdded,
                 message: `The strategy "${name}" is already added.`,
                 cause: { strategyName: name }
             });
@@ -105,7 +104,7 @@ export class BasaltLogger<TStrategies extends StrategyMap = {}> extends TypedEve
      *
      * @template Key - The name of the strategy.
      *
-     * @throws ({@link BasaltError}): If the strategy is not found. ({@link loggerKeyError.strategyNotFound})
+     * @throws ({@link BasaltError}): If the strategy is not found. ({@link loggerErrorKeys.strategyNotFound})
      *
      * @returns A new BasaltLogger instance without the removed strategy.
      */
@@ -114,7 +113,7 @@ export class BasaltLogger<TStrategies extends StrategyMap = {}> extends TypedEve
     ): BasaltLogger<Omit<TStrategies, Key>> {
         if (!(name in this._strategies))
             throw new BasaltError({
-                key: loggerKeyError.strategyNotFound,
+                key: loggerErrorKeys.strategyNotFound,
                 message: `The strategy "${String(name)}" is not found.`,
                 cause: { strategyName: name }
             });
@@ -128,7 +127,7 @@ export class BasaltLogger<TStrategies extends StrategyMap = {}> extends TypedEve
      *
      * @template TNew - The new strategies to add.
      *
-     * @throws ({@link BasaltError}): If any strategy is already added. ({@link loggerKeyError.stategyAlreadyAdded})
+     * @throws ({@link BasaltError}): If any strategy is already added. ({@link loggerErrorKeys.stategyAlreadyAdded})
      *
      * @returns A new BasaltLogger instance with the added strategies.
      */
@@ -145,7 +144,7 @@ export class BasaltLogger<TStrategies extends StrategyMap = {}> extends TypedEve
      *
      * @template Keys - The names of the strategies to remove.
      *
-     * @throws ({@link BasaltError}): If any strategy is not found. ({@link loggerKeyError.strategyNotFound})
+     * @throws ({@link BasaltError}): If any strategy is not found. ({@link loggerErrorKeys.strategyNotFound})
      *
      * @returns A new BasaltLogger instance without the removed strategies.
      */
@@ -175,7 +174,7 @@ export class BasaltLogger<TStrategies extends StrategyMap = {}> extends TypedEve
      * @param object - The object to log. ({@link BodiesIntersection})
      * @param strategiesNames - The names of the strategies to use. If not provided, all strategies will be used.
      *
-     * @throws ({@link BasaltError}): If no strategy is added. ({@link loggerKeyError.noStrategyAdded})
+     * @throws ({@link BasaltError}): If no strategy is added. ({@link loggerErrorKeys.noStrategyAdded})
      */
     public error<SNames extends (keyof TStrategies)[] = (keyof TStrategies)[]>(
         object: BodiesIntersection<TStrategies, SNames[number]>,
@@ -192,7 +191,7 @@ export class BasaltLogger<TStrategies extends StrategyMap = {}> extends TypedEve
      * @param object - The object to log. ({@link BodiesIntersection})
      * @param strategiesNames - The names of the strategies to use. If not provided, all strategies will be used.
      *
-     * @throws ({@link BasaltError}): If no strategy is added. ({@link loggerKeyError.noStrategyAdded})
+     * @throws ({@link BasaltError}): If no strategy is added. ({@link loggerErrorKeys.noStrategyAdded})
      */
     public warn<SNames extends (keyof TStrategies)[] = (keyof TStrategies)[]>(
         object: BodiesIntersection<TStrategies, SNames[number]>,
@@ -209,7 +208,7 @@ export class BasaltLogger<TStrategies extends StrategyMap = {}> extends TypedEve
      * @param object - The object to log. ({@link BodiesIntersection})
      * @param strategiesNames - The names of the strategies to use. If not provided, all strategies will be used.
      *
-     * @throws ({@link BasaltError}): If no strategy is added. ({@link loggerKeyError.noStrategyAdded})
+     * @throws ({@link BasaltError}): If no strategy is added. ({@link loggerErrorKeys.noStrategyAdded})
      */
     public info<SNames extends (keyof TStrategies)[] = (keyof TStrategies)[]>(
         object: BodiesIntersection<TStrategies, SNames[number]>,
@@ -226,7 +225,7 @@ export class BasaltLogger<TStrategies extends StrategyMap = {}> extends TypedEve
      * @param object - The object to log. ({@link BodiesIntersection})
      * @param strategiesNames - The names of the strategies to use. If not provided, all strategies will be used.
      *
-     * @throws ({@link BasaltError}): If no strategy is added. ({@link loggerKeyError.noStrategyAdded})
+     * @throws ({@link BasaltError}): If no strategy is added. ({@link loggerErrorKeys.noStrategyAdded})
      */
     public debug<SNames extends (keyof TStrategies)[] = (keyof TStrategies)[]>(
         object: BodiesIntersection<TStrategies, SNames[number]>,
@@ -243,7 +242,7 @@ export class BasaltLogger<TStrategies extends StrategyMap = {}> extends TypedEve
      * @param object - The object to log. ({@link BodiesIntersection})
      * @param strategiesNames - The names of the strategies to use. If not provided, all strategies will be used.
      *
-     * @throws ({@link BasaltError}): If no strategy is added. ({@link loggerKeyError.noStrategyAdded})
+     * @throws ({@link BasaltError}): If no strategy is added. ({@link loggerErrorKeys.noStrategyAdded})
      */
     public log<SNames extends (keyof TStrategies)[] = (keyof TStrategies)[]>(
         object: BodiesIntersection<TStrategies, SNames[number]>,
@@ -257,7 +256,7 @@ export class BasaltLogger<TStrategies extends StrategyMap = {}> extends TypedEve
      *
      * @template TLogObject - The type of the log object.
      *
-     * @throws ({@link BasaltError}): If a strategy throws. ({@link loggerKeyError.loggerStrategyError})
+     * @throws ({@link BasaltError}): If a strategy throws. ({@link loggerErrorKeys.loggerStrategyError})
      */
     private async _executeStrategies<TLogObject>(
         level: LogLevels,
@@ -270,7 +269,7 @@ export class BasaltLogger<TStrategies extends StrategyMap = {}> extends TypedEve
                 await (this._strategies[name] as LoggerStrategy<TLogObject> | undefined)?.log(level, date, object);
             } catch (error) {
                 throw new BasaltError({
-                    key: loggerKeyError.loggerStrategyError,
+                    key: loggerErrorKeys.loggerStrategyError,
                     message: `An error occurred while executing the strategy "${String(name)}".`,
                     cause: { strategyName: name, object, error }
                 });
@@ -287,7 +286,7 @@ export class BasaltLogger<TStrategies extends StrategyMap = {}> extends TypedEve
      * @param object - The object to log.
      * @param strategiesNames - The names of the strategies to use. If not provided, all strategies will be used.
      *
-     * @throws ({@link BasaltError}): If no strategy is added. ({@link loggerKeyError.noStrategyAdded})
+     * @throws ({@link BasaltError}): If no strategy is added. ({@link loggerErrorKeys.noStrategyAdded})
      */
     private _out<TLogObject>(
         level: LogLevels,
@@ -298,7 +297,7 @@ export class BasaltLogger<TStrategies extends StrategyMap = {}> extends TypedEve
         if (strategyKeys.length === 0)
             throw new BasaltError({
                 message: 'No strategy is added.',
-                key: loggerKeyError.noStrategyAdded
+                key: loggerErrorKeys.noStrategyAdded
             });
         if (this._pendingLogs.length >= this._maxPendingLogs)
             return;
