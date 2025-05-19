@@ -1,5 +1,46 @@
 # Changelog
 
+## v1.13.0-canary-20250519-8b05a3d
+
+[compare changes](https://github.com/Basalt-Lab/basalt-logger/compare/v1.12.2-canary-20250505-340b01c...v1.13.0-canary-20250519-8b05a3d)
+
+### 🚀 Enhancements
+
+- **🚀:** [ enhance BasaltLogger full type-safe] ([aa66c77](https://github.com/Basalt-Lab/basalt-logger/commit/aa66c77))
+
+### 🧹 Refactors
+
+- **🧹:** [Refacto files structure] ([4fa283c](https://github.com/Basalt-Lab/basalt-logger/commit/4fa283c))
+- **🧹:** [Refacto build, delete files, etc..] ([98cb820](https://github.com/Basalt-Lab/basalt-logger/commit/98cb820))
+
+### 📦 Build
+
+- **📦:** [Update ESLint and dependencies in package.json] ([6961f6e](https://github.com/Basalt-Lab/basalt-logger/commit/6961f6e))
+- **📦:** [Fix incorrect path for error strategy file] Updated the path for the error strategy file from './source/strategy/index.ts' to './source/strategies/index.ts' to ensure correct file referencing in the build process. ([2e6a85d](https://github.com/Basalt-Lab/basalt-logger/commit/2e6a85d))
+
+### 🦉 Chore
+
+- **🦉:** V1.12.2 ([b9f0bf9](https://github.com/Basalt-Lab/basalt-logger/commit/b9f0bf9))
+- **🦉:** [Add new issue templates for feature requests, bug reports, documentation, and help requests] ([68a8ad8](https://github.com/Basalt-Lab/basalt-logger/commit/68a8ad8))
+- **🦉:** [Remove useless file] ([6646e01](https://github.com/Basalt-Lab/basalt-logger/commit/6646e01))
+
+### 🧪 Tests
+
+- **🧪:** [Refactor tests] ([d94c830](https://github.com/Basalt-Lab/basalt-logger/commit/d94c830))
+
+### 🎨 Styles
+
+- **🎨:** [Disable no-empty-object-type rule in ESLint config] ([78776ff](https://github.com/Basalt-Lab/basalt-logger/commit/78776ff))
+
+### 🤖 CI
+
+- **🤖:** [Update GitHub Actions workflows for release process] ([186dd02](https://github.com/Basalt-Lab/basalt-logger/commit/186dd02))
+
+### ❤️ Contributors
+
+- Ruby <necrelox@proton.me>
+- Github-actions <necrelox@proton.me>
+
 ## v1.12.2
 
 [compare changes](https://github.com/Basalt-Lab/basalt-logger/compare/v1.12.2-canary-20250505-340b01c...v1.12.2)
