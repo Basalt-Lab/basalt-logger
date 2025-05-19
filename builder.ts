@@ -21,7 +21,7 @@ await Bun.build({
         './source/error/index.ts',
         './source/error/types/index.ts',
 
-        './source/strategy/index.ts',
+        './source/strategies/index.ts',
 
         './source/types/index.ts',
 
