@@ -1,13 +1,6 @@
-// Exports logger and strategy classes
-export * from './core/basaltLogger';
-export * from './core/strategy/consoleLogger';
-export * from './core/strategy/fileLogger';
-
-
-// Exports of error classes
-export * from './error/basaltError';
-export * from './error/key/loggerKeyError';
-
-// Exports of TypeScript types
-export type * from './types/data/logLevels';
-export type * from './types/data/loggerStrategy';
+export * from './basaltLogger';
+export * from './enums/index';
+export * from './error/index';
+export type * from './error/types/index';
+export * from './strategies/index';
+export type * from './types/index';
