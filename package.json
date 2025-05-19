@@ -5,16 +5,6 @@
   "description": "A non-blocking logger with logging strategies",
   "type": "module",
   "license": "MIT",
-  "scripts": {
-    "build": "bun builder.ts",
-    "dev": "bun --watch source/index.ts",
-    "docs": "typedoc",
-    "fix-lint": "eslint --fix ./source",
-    "lint": "eslint ./source",
-    "start": "bun build/index.js",
-    "test": "bun test --coverage",
-    "test:unit": "bun test --coverage $(find test/unit -name '*.spec.ts')"
-  },
   "keywords": [
     "bun",
     "basalt-logger",
@@ -22,23 +12,32 @@
     "logger"
   ],
   "exports": {
-    "./strategy": "./dist/core/strategy/index.js",
-    "./logger": "./dist/core/index.js",
-    "./error": "./dist/error/index.js",
-    "./error/key": "./dist/error/key/index.js",
-    "./types": "./dist/types/index.js",
+    "./enums": "./dist/core/enums/index.js",
+    "./error": "./dist/core/error/index.js",
+    "./error/types": "./dist/core/error/types/index.js",
+    "./strategies": "./dist/core/strategies/index.js",
+    "./types": "./dist/core/types/index.js",
     ".": "./dist/index.js"
   },
+  "scripts": {
+    "build": "bun builder.ts",
+    "docs": "typedoc --tsconfig tsconfig.dts.json",
+    "fix-lint": "eslint --fix ./source",
+    "lint": "eslint ./source",
+    "start": "bun build/index.js",
+    "test:unit": "bun test --coverage $(find test/unit -name '*.spec.ts')",
+    "test": "bun test --coverage"
+  },
   "devDependencies": {
-    "@eslint/js": "^9.26.0",
+    "@eslint/js": "^9.27.0",
     "@stylistic/eslint-plugin": "^4.2.0",
-    "@types/bun": "^1.2.12",
-    "eslint": "^9.26.0",
+    "@types/bun": "^1.2.13",
+    "eslint": "^9.27.0",
     "eslint-plugin-tsdoc": "^0.4.0",
-    "globals": "^16.0.0",
-    "tsc-alias": "^1.8.15",
+    "globals": "^16.1.0",
+    "tsc-alias": "^1.8.16",
     "typedoc": "^0.28.4",
-    "typescript-eslint": "^8.31.1"
+    "typescript-eslint": "^8.32.1"
   },
   "peerDependencies": {
     "typescript": "^5.8.3"

@@ -1,5 +1,5 @@
-import type { LoggerStrategy } from '#/types/data/loggerStrategy';
-import type { LogLevels } from '#/types/data/logLevels';
+import type { LoggerStrategy } from '#/types/loggerStrategy';
+import type { LogLevels } from '#/types/logLevels';
 
 /**
  * ConsoleLoggerStrategy implements LoggerStrategy to provide logging functionality to the console. ({@link LoggerStrategy})

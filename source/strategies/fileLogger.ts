@@ -1,7 +1,7 @@
 import { appendFile } from 'fs/promises';
 
-import type { LoggerStrategy } from '#/types/data/loggerStrategy';
-import type { LogLevels } from '#/types/data/logLevels';
+import type { LoggerStrategy } from '#/types/loggerStrategy';
+import type { LogLevels } from '#/types/logLevels';
 
 /**
  * FileLoggerStrategy implements LoggerStrategy to provide logging functionality to the file system. ({@link LoggerStrategy})
