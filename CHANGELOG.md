@@ -1,4 +1,21 @@
 
+## v1.13.1-canary-20250520-efe1efa
+
+[compare changes](https://github.com/Basalt-Lab/basalt-logger/compare/v1.13.0-canary-20250519-ed4745f...v1.13.1-canary-20250520-efe1efa)
+
+### 📦 Build
+
+- **📦:** [Fix export] ([03de61f](https://github.com/Basalt-Lab/basalt-logger/commit/03de61f))
+
+### 🦉 Chore
+
+- **🦉:** V1.13.0 ([87828ca](https://github.com/Basalt-Lab/basalt-logger/commit/87828ca))
+
+### ❤️ Contributors
+
+- Ruby <necrelox@proton.me>
+- Github-actions <necrelox@proton.me>
+
 ## v1.13.0
 
 [compare changes](https://github.com/Basalt-Lab/basalt-logger/compare/v1.13.0-canary-20250519-ed4745f...v1.13.0)
