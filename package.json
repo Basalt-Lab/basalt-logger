@@ -12,11 +12,11 @@
     "logger"
   ],
   "exports": {
-    "./enums": "./dist/core/enums/index.js",
-    "./error": "./dist/core/error/index.js",
-    "./error/types": "./dist/core/error/types/index.js",
-    "./strategies": "./dist/core/strategies/index.js",
-    "./types": "./dist/core/types/index.js",
+    "./enums": "./dist/enums/index.js",
+    "./error": "./dist/error/index.js",
+    "./error/types": "./dist/error/types/index.js",
+    "./strategies": "./dist/strategies/index.js",
+    "./types": "./dist/types/index.js",
     ".": "./dist/index.js"
   },
   "scripts": {
