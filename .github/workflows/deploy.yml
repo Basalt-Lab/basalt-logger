@@ -1,5 +1,5 @@
-name: Release and Publish
-run-name: Release & Publish for "${{ github.ref_name }}" by "${{ github.actor }}"
+name: Deploy
+run-name: Deploy to "${{ github.ref_name }}" by "${{ github.actor }}"
 
 on:
   push:
@@ -118,17 +118,17 @@ jobs:
       GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
       GH_TOKEN:  ${{ secrets.GITHUB_TOKEN }}
 
-  # publish-npm:
-  #   needs:
-  #     - create-github-release
-  #     - detect-context
-  #   uses: ./.github/workflows/publish-npm.yml
-  #   with:
-  #     branch: ${{ needs.detect-context.outputs.branch }}
-  #     npmTag: ${{ needs.detect-context.outputs.npmTag }}
-  #   secrets:
-  #     KEY_SSH: ${{ secrets.KEY_SSH }}
-  #     NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+  publish-npm:
+    needs:
+      - create-github-release
+      - detect-context
+    uses: ./.github/workflows/publish-npm.yml
+    with:
+      branch: ${{ needs.detect-context.outputs.branch }}
+      npmTag: ${{ needs.detect-context.outputs.npmTag }}
+    secrets:
+      KEY_SSH: ${{ secrets.KEY_SSH }}
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
   doc:
     needs:
