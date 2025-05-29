@@ -1,4 +1,4 @@
-name: Unit Test
+name: Integration Test
 
 on:
   workflow_call:
@@ -12,8 +12,8 @@ on:
         required: true
 
 jobs:
-  unit-test:
-    name: Check unit tests
+  integration-test:
+    name: Check integration tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -31,6 +31,6 @@ jobs:
       - name: Install Dependencies
         run: bun install
 
-      - name: Run Unit Tests and update Summary
-        id: unit_test
-        run: bun run test:unit
+      - name: Run Integration Tests and update Summary
+        id: integration_test
+        run: bun run test:integration
