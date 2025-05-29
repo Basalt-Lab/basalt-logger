@@ -1,12 +1,6 @@
 import { EventEmitter } from 'events';
 
-/**
- * Defines a map of event names to their payload types.
- * @remarks
- * Use this interface to specify the shape of events for TypedEventEmitter.
- */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type EventMap = Record<string | number | symbol, any>;
+import type { EventMap } from './types/eventMap';
 
 /**
  * A generic event emitter class that allows for type-safe event handling.
